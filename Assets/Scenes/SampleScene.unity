@@ -310,6 +310,7 @@ MonoBehaviour:
   rotationSpeed: 200
   dashForce: 10
   dashDuration: 0.2
+  vida: 100
 --- !u!50 &665964851
 Rigidbody2D:
   serializedVersion: 4
@@ -583,6 +584,7 @@ GameObject:
   - component: {fileID: 1983637703}
   - component: {fileID: 1983637702}
   - component: {fileID: 1983637705}
+  - component: {fileID: 1983637706}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -691,3 +693,15 @@ CircleCollider2D:
   m_Offset: {x: 0.10119361, y: 0.32382014}
   serializedVersion: 2
   m_Radius: 0.93928266
+--- !u!114 &1983637706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983637701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0f009c8ea57cb4faf5aa37e6ce58d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float rotationSpeed;
     public float dashForce;
     public float dashDuration;
+    public float vida=100;
 
     private bool dashing = false;
 
