@@ -15,8 +15,10 @@ public class Player : MonoBehaviour
 
     public float dashForce;
     public float dashDuration;
+    public float dashCooldown;
 
     private bool dashing = false;
+    private bool dashInCooldown = false;
     private Rigidbody2D rigidBody2D;
 
     // Start is called before the first frame update
@@ -28,13 +30,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && CanStartDash())
             Dash();
         else
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetAxis("Vertical") == 1)
                 speed = maxSpeed;
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetAxis("Vertical") == -1) 
                 speed = minSpeed;
             else
                 speed = baseSpeed;
@@ -74,10 +76,16 @@ public class Player : MonoBehaviour
     }
     private void Dash()
     {
-        Vector2 force = GetCurrentDirection() * dashForce;
+        Vector2 force = GetCurrentDirection() * dashForce * speed;
         dashing = true;
+        dashInCooldown = true;
         Invoke("StopDashing", dashDuration);
+        Invoke("EnableDash", dashCooldown);
         rigidBody2D.AddForce(force, ForceMode2D.Impulse);
+    }
+    private bool CanStartDash()
+    {
+        return !dashing && !dashInCooldown;
     }
 
     private void StopDashing()
@@ -85,6 +93,11 @@ public class Player : MonoBehaviour
         dashing = false;
         rigidBody2D.velocity = Vector2.zero;
         rigidBody2D.angularVelocity = 0;
+    }
+
+    private void EnableDash()
+    {
+        dashInCooldown = false;
     }
 
     Vector2 GetCurrentDirection()
