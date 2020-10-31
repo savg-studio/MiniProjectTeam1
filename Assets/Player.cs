@@ -7,13 +7,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed;
+    public float maxSpeed;
+    public float minSpeed;
+    public float baseSpeed;
     public float rotationSpeed;
+    private float speed;
+
     public float dashForce;
     public float dashDuration;
 
     private bool dashing = false;
-
     private Rigidbody2D rigidBody2D;
 
     // Start is called before the first frame update
@@ -27,14 +30,25 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
             Dash();
+        else
+        {
+            if (Input.GetKey(KeyCode.W))
+                speed = maxSpeed;
+            else if (Input.GetKey(KeyCode.S))
+                speed = minSpeed;
+            else
+                speed = baseSpeed;
+        }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        Vector3 newRotation = GetInputRotation();
-        Rotate(newRotation);
-        if(!dashing)
+        if (!dashing)
+        {
+            Vector3 newRotation = GetInputRotation();
+            Rotate(newRotation);
             Move();
+        }
     }
 
     private Vector3 GetInputRotation()
@@ -44,7 +58,7 @@ public class Player : MonoBehaviour
         return new Vector3(currentRotation.x, currentRotation.y, newZRotation);
     }
 
-    void Rotate(Vector3 rotation)
+    private void Rotate(Vector3 rotation)
     {
         // Updates rigidbody velocity
         Vector2 direction = AngleToVector2(rotation.z); // If angle is zero, default direction should be (0, 1) instead of (1, 0)
@@ -52,20 +66,21 @@ public class Player : MonoBehaviour
         rigidBody2D.SetRotation(rotation.z);
     }
 
-    void Move()
+    private void Move()
     {
         Vector3 dir = GetCurrentDirection();
         Vector2 nextPos = transform.position + dir * speed * Time.deltaTime;
         rigidBody2D.MovePosition(nextPos);
     }
-    void Dash()
+    private void Dash()
     {
         Vector2 force = GetCurrentDirection() * dashForce;
         dashing = true;
         Invoke("StopDashing", dashDuration);
         rigidBody2D.AddForce(force, ForceMode2D.Impulse);
     }
-    void StopDashing()
+
+    private void StopDashing()
     {
         dashing = false;
         rigidBody2D.velocity = Vector2.zero;
