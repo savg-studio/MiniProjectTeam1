@@ -706,7 +706,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &665964852
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -877,6 +877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 829429670}
   - component: {fileID: 829429671}
+  - component: {fileID: 829429672}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -948,6 +949,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &829429672
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829429669}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: e3907768e49bce4478d61d00c66d70af, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e3907768e49bce4478d61d00c66d70af, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &939358179
 GameObject:
   m_ObjectHideFlags: 0

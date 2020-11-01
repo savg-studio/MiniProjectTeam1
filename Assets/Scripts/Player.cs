@@ -23,19 +23,24 @@ public class Player : MonoBehaviour
     private bool dashInCooldown = false;
 
     // State
-    public float stunDuration = 2f;
+    public float stunDuration;
     private bool stunned = false;
 
-    // Push
-    public float pushMod = 1f;
+    public float invulnerabilityDuration;
+    private bool invulnerable = false;
 
     // Components
     private Rigidbody2D rigidBody2D;
+    private Animation blinkAnimation;
+    private SpriteRenderer spriteRenderer;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
+        blinkAnimation = GetComponentInChildren<Animation>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -56,10 +61,11 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!dashing && !stunned)
-        {
+        if (!stunned)
             ResetAngularVelocity();
 
+        if (!dashing && !stunned)
+        {
             Vector3 newRotation = GetInputRotation();
             Rotate(newRotation);
             Move();
@@ -116,18 +122,30 @@ public class Player : MonoBehaviour
     private void Stun(MeteorScript ms)
     {
         stunned = true;
-
-        //rigidBody2D.freezeRotation = false;
+        Invoke("Recover", stunDuration);
+        StartInvulnerability();
     }
 
-    private void Push(Vector2 dir, float force)
-    {
-        rigidBody2D.AddForce(dir * force);
-    }
     private void Recover()
     {
         stunned = false;
+        ResetAngularVelocity();
     }
+
+    private void StartInvulnerability()
+    {
+        invulnerable = true;
+        blinkAnimation.Play();
+
+        Invoke("StopInvulnerability", invulnerabilityDuration);
+    }
+    private void StopInvulnerability()
+    {
+        invulnerable = false;
+        blinkAnimation.Stop();
+        spriteRenderer.enabled = true;
+    }
+
     private void ResetAngularVelocity()
     {
         rigidBody2D.angularVelocity = 0;
@@ -148,7 +166,7 @@ public class Player : MonoBehaviour
 
     public void CollideWith(MeteorScript ms, Collision2D collision)
     {
-        Stun(ms);
-        Invoke("Recover", stunDuration);
+        if (!invulnerable)
+            Stun(ms);
     }
 }
