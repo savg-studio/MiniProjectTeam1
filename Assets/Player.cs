@@ -7,18 +7,29 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Speed
     public float maxSpeed;
     public float minSpeed;
     public float baseSpeed;
     public float rotationSpeed;
     private float speed;
 
+    // Dash
     public float dashForce;
     public float dashDuration;
     public float dashCooldown;
 
     private bool dashing = false;
     private bool dashInCooldown = false;
+
+    // State
+    public float stunDuration = 2f;
+    private bool stunned = false;
+
+    // Push
+    public float pushMod = 1f;
+
+    // Components
     private Rigidbody2D rigidBody2D;
 
     // Start is called before the first frame update
@@ -45,8 +56,10 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!dashing)
+        if (!dashing && !stunned)
         {
+            ResetAngularVelocity();
+
             Vector3 newRotation = GetInputRotation();
             Rotate(newRotation);
             Move();
@@ -100,6 +113,26 @@ public class Player : MonoBehaviour
         dashInCooldown = false;
     }
 
+    private void Stun(MeteorScript ms)
+    {
+        stunned = true;
+
+        //rigidBody2D.freezeRotation = false;
+    }
+
+    private void Push(Vector2 dir, float force)
+    {
+        rigidBody2D.AddForce(dir * force);
+    }
+    private void Recover()
+    {
+        stunned = false;
+    }
+    private void ResetAngularVelocity()
+    {
+        rigidBody2D.angularVelocity = 0;
+    }
+
     Vector2 GetCurrentDirection()
     {
         Vector3 currentRotation = transform.rotation.eulerAngles;
@@ -111,5 +144,11 @@ public class Player : MonoBehaviour
     Vector2 AngleToVector2(float angle)
     {
         return new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
+    }
+
+    public void CollideWith(MeteorScript ms, Collision2D collision)
+    {
+        Stun(ms);
+        Invoke("Recover", stunDuration);
     }
 }
