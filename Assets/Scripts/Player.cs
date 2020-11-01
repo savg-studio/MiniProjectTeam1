@@ -1,8 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -22,6 +19,13 @@ public class Player : MonoBehaviour
     private bool dashing = false;
     private bool dashInCooldown = false;
 
+    // Shoot
+    public float laserDuration;
+    public float laserInterval;
+    public bool laserRecoilEnabled;
+    public float laserRecoilForce;
+    public float laserRecoilDuration;
+
     // State
     public float stunDuration;
     private bool stunned = false;
@@ -29,10 +33,15 @@ public class Player : MonoBehaviour
     public float invulnerabilityDuration;
     private bool invulnerable = false;
 
+    private bool laserReady = true;
+    private bool inRecoil = false;
+
     // Components
     private Rigidbody2D rigidBody2D;
     private Animation blinkAnimation;
     private SpriteRenderer spriteRenderer;
+
+    private GameObject attack;
 
 
     // Start is called before the first frame update
@@ -41,6 +50,8 @@ public class Player : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
         blinkAnimation = GetComponentInChildren<Animation>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        attack = transform.Find("Attack").gameObject;
     }
 
     // Update is called once per frame
@@ -57,6 +68,14 @@ public class Player : MonoBehaviour
             else
                 speed = baseSpeed;
         }
+
+        if(!stunned)
+        {
+            if(Input.GetButton("Fire1") && laserReady)
+            {
+                Laser();
+            }
+        }
     }
 
     void FixedUpdate()
@@ -64,12 +83,55 @@ public class Player : MonoBehaviour
         if (!stunned)
             ResetAngularVelocity();
 
-        if (!dashing && !stunned)
+        if (!dashing && !stunned && !inRecoil)
         {
             Vector3 newRotation = GetInputRotation();
             Rotate(newRotation);
             Move();
         }
+    }
+
+    private void Laser()
+    {
+        attack.SetActive(true);
+        laserReady = false;
+        if(laserRecoilEnabled)
+            Recoil();
+
+        Invoke("StopLaser", laserDuration);
+        Invoke("RecoverLaser", laserInterval);
+        Invoke("RecoverFromRecoil", laserRecoilDuration);
+    }
+
+    private void StopLaser()
+    {
+        attack.SetActive(false);
+    }
+    private void RecoverLaser()
+    {
+        laserReady = true;
+    }
+
+    private void Recoil()
+    {
+        inRecoil = true;
+        rigidBody2D.velocity = Vector2.zero;
+        rigidBody2D.AddForce(GetRecoilDir() * laserRecoilForce);
+    }
+    private void RecoverFromRecoil()
+    {
+        inRecoil = false;
+    }
+
+    private Vector2 GetRecoilDir()
+    {
+        var recoilDir =  -1 * GetCurrentDirection();
+        return recoilDir;
+    }
+
+    private bool CanLaser()
+    {
+        return laserReady;
     }
 
     private Vector3 GetInputRotation()
