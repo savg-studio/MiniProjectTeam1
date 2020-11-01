@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float dashForce;
     public float dashDuration;
     public float vida=100;
+    public float vida_max= 100;
 
     private bool dashing = false;
 
