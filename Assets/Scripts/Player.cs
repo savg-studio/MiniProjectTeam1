@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
         dashInCooldown = false;
     }
 
-    private void Stun(MeteorScript ms)
+    private void Stun(Projectile p)
     {
         stunned = true;
         Invoke("Recover", stunDuration);
@@ -164,9 +164,11 @@ public class Player : MonoBehaviour
         return new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
     }
 
-    public void CollideWith(MeteorScript ms, Collision2D collision)
+    public void CollideWith(Projectile p, Collision2D collision)
     {
         if (!invulnerable)
-            Stun(ms);
+        {
+            Stun(p);
+        }
     }
 }
