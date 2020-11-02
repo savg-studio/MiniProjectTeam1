@@ -75,6 +75,13 @@ public class Projectile : MonoBehaviour
         {
             player.CollideWith(this, collision);
         }
+
+        OnCollide(collision);
+    }
+
+    public virtual void OnCollide(Collision2D collision)
+    {
+
     }
 
     private void OnBecameInvisible()

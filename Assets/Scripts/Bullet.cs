@@ -20,4 +20,9 @@ public class Bullet : Projectile
     {
         GameObject.Destroy(this);
     }
+
+    public override void OnCollide(Collision2D collision)
+    {
+        GameObject.Destroy(this.gameObject);
+    }
 }

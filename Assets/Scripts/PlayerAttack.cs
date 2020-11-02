@@ -20,12 +20,10 @@ public class PlayerAttack : MonoBehaviour
     {
         var go = collision.gameObject;
 
-        go.SetActive(false); // TODO: Remove
-
-        MeteorScript meteor = go.GetComponent<MeteorScript>();
+        Projectile meteor = go.GetComponent<Projectile>();
         if (meteor)
         {
-            go.SetActive(false);
+            GameObject.Destroy(go);
         }
     }
 }

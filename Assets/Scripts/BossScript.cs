@@ -10,6 +10,7 @@ public enum Direction
 
 public class BossScript : MonoBehaviour
 {
+    public GameObject player;
     public GameObject faceRef;
     public GameObject bossAttackZone;
     public List<GameObject> bossZones;
@@ -40,7 +41,7 @@ public class BossScript : MonoBehaviour
         moving = true;
         SetNextTarget();
 
-        Invoke("Shoot", GetNextShotTime());
+        Invoke("Shoot", GetNextShotTime()); // TODO: Becomes a problem if the object is deactivated
     }
 
     // Update is called once per frame
@@ -51,6 +52,8 @@ public class BossScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        FacePlayer();
+
         if (moving)
         {
             if (HasReachedTarget())
@@ -76,8 +79,11 @@ public class BossScript : MonoBehaviour
         // Shoot bullet
         var bullet = go.GetComponent<Bullet>();
         bullet.Init();
-        bullet.Launch(GetShotDir(), shootSpeed);
 
+        var shootDir = GetShotDir();
+        var rotation = T1Utils.Vector2ToAngle(shootDir);
+        bullet.SetRotation(rotation - 90);
+        bullet.Launch(GetShotDir(), shootSpeed);
 
         Invoke("Shoot", GetNextShotTime());
     }
@@ -111,6 +117,16 @@ public class BossScript : MonoBehaviour
         rigidbody.MovePosition(pos + dir * speed);
     }
 
+    private void FacePlayer()
+    {
+        Vector2 pos = GetCurrentPos();
+        Vector2 playerPos = player.transform.position;
+
+        var aToB = (playerPos - pos).normalized;
+        var rot = T1Utils.Vector2ToAngle(aToB);
+        rigidbody.SetRotation(rot);
+    }
+    
     private Vector2 GetDirToTarget()
     {
         return (currentPosTarget - GetCurrentPos()).normalized;
