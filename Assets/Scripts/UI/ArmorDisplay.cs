@@ -13,10 +13,15 @@ public class ArmorDisplay : MonoBehaviour
     private uint currentArmor;
     private string textFormat = "Armor: {0}/{1}";
 
+    private void Awake()
+    {
+        text = GetComponent<Text>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        text = GetComponent<Text>();
+        
     }
 
     // Update is called once per frame
