@@ -55,7 +55,7 @@ public class Spawn : MonoBehaviour
         OnSpawn(go);
     }
 
-    private bool ShouldSpawn()
+    public bool ShouldSpawn()
     {
         float roll = Random.Range(0f, 1f);
         return OnShouldSpawn() && roll < chanceToSpawn;

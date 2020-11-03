@@ -18,7 +18,8 @@ public class PeriodicSpawn : MonoBehaviour
     protected void OnSpawnObjects()
     {
         float nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
-        child.SpawnObjects();
+        if(child.ShouldSpawn())
+            child.SpawnObjects();
         Invoke("OnSpawnObjects", nextSpawnTime);
     }
 

@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 375486261}
   - component: {fileID: 375486262}
   m_Layer: 0
-  m_Name: MeteorZone
+  m_Name: GameZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2274,7 +2274,7 @@ PrefabInstance:
     - target: {fileID: 418013234254135962, guid: 57fcb76f92f844c47889042fa47a4b9a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7935279899558424486, guid: 57fcb76f92f844c47889042fa47a4b9a,
         type: 3}

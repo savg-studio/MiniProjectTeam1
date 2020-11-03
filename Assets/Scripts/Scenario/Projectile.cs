@@ -37,6 +37,7 @@ public class Projectile : MonoBehaviour
     {
         rigidbody2D.AddForce(dir * force);
     }
+
     public void Launch(Vector2 dir, float minForce, float maxForce)
     {
         float force = Random.Range(minForce, maxForce);
