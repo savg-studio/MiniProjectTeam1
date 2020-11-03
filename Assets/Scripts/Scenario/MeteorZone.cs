@@ -8,7 +8,7 @@ public class MeteorZone : MonoBehaviour
 
     public uint maxMeteors;
 
-    private List<MeteorScript> meteors = new List<MeteorScript>();
+    private List<Meteor> meteors = new List<Meteor>();
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class MeteorZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var meteor = collision.gameObject.GetComponent<MeteorScript>();
+        var meteor = collision.gameObject.GetComponent<Meteor>();
 
         if(meteor)
         {
@@ -31,7 +31,7 @@ public class MeteorZone : MonoBehaviour
             Destroy(meteor.gameObject);
         }
     }
-    public void AddMeteor(MeteorScript ms)
+    public void AddMeteor(Meteor ms)
     {
         meteors.Add(ms);
     }

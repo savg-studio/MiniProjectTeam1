@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteorScript : Projectile
+public class Meteor : Projectile
 {
     protected override void OnInit()
     {

@@ -459,6 +459,8 @@ GameObject:
   - component: {fileID: 375486259}
   - component: {fileID: 375486258}
   - component: {fileID: 375486260}
+  - component: {fileID: 375486261}
+  - component: {fileID: 375486262}
   m_Layer: 0
   m_Name: MeteorZone
   m_TagString: Untagged
@@ -519,6 +521,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMeteors: 4
+--- !u!114 &375486261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375486257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3917aebd196cc384da6716cf3ebf9c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 6190269493852735535, guid: faeca76667226d04e941584b59ac8fab,
+    type: 3}
+  chanceToSpawn: 0.25
+  minAmount: 1
+  maxAmount: 2
+  minTorque: 100
+  maxTorque: 500
+  minSize: 1
+  maxSize: 2
+--- !u!114 &375486262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375486257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3917aebd196cc384da6716cf3ebf9c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 306646787676801410, guid: bb16ffceeab61ec4c91a9450a5a324a3,
+    type: 3}
+  chanceToSpawn: 0.25
+  minAmount: 2
+  maxAmount: 4
+  minTorque: 200
+  maxTorque: 400
+  minSize: 0.33
+  maxSize: 0.33
 --- !u!1 &433838453
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,18 +633,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f4538afcf31114c98e79333c7901ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objecToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
+  objectToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
     type: 3}
-  oneTime: 0
-  instant: 1
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  chanceToSpawn: 0.75
-  spawnTarget: {fileID: 375486257}
-  minForce: 200
-  maxForce: 300
+  chanceToSpawn: 1
+  minAmount: 1
+  maxAmount: 1
+  minTorque: 50
+  maxTorque: 100
   minSize: 0.25
-  maxSize: 1
+  maxSize: 0.5
+  spawnTarget: {fileID: 375486257}
+  minForce: 100
+  maxForce: 400
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +913,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -1109,6 +1153,7 @@ GameObject:
   - component: {fileID: 672657563}
   - component: {fileID: 672657564}
   - component: {fileID: 672657565}
+  - component: {fileID: 672657566}
   m_Layer: 9
   m_Name: TopSpawn
   m_TagString: Untagged
@@ -1168,18 +1213,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f4538afcf31114c98e79333c7901ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objecToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
+  objectToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
     type: 3}
-  oneTime: 0
-  instant: 1
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  chanceToSpawn: 0.75
+  chanceToSpawn: 1
+  minAmount: 1
+  maxAmount: 1
+  minTorque: 50
+  maxTorque: 100
+  minSize: 0.25
+  maxSize: 0.5
   spawnTarget: {fileID: 375486257}
   minForce: 100
   maxForce: 400
-  minSize: 0.25
-  maxSize: 2
+--- !u!114 &672657566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672657562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25787e2b6ff5dce42a3fd83cc7ec90cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpawnInterval: 4
+  maxSpawnInterval: 8
+  child: {fileID: 672657565}
 --- !u!1 &828108647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,18 +1555,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f4538afcf31114c98e79333c7901ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objecToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
+  objectToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
     type: 3}
-  oneTime: 0
-  instant: 1
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  chanceToSpawn: 0.75
-  spawnTarget: {fileID: 375486257}
-  minForce: 200
-  maxForce: 300
+  chanceToSpawn: 1
+  minAmount: 1
+  maxAmount: 1
+  minTorque: 50
+  maxTorque: 100
   minSize: 0.25
-  maxSize: 1
+  maxSize: 0.5
+  spawnTarget: {fileID: 375486257}
+  minForce: 100
+  maxForce: 400
 --- !u!1 &1098447256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,18 +2161,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f4538afcf31114c98e79333c7901ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objecToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
+  objectToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
     type: 3}
-  oneTime: 0
-  instant: 1
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  chanceToSpawn: 0.75
-  spawnTarget: {fileID: 375486257}
-  minForce: 20
-  maxForce: 50
+  chanceToSpawn: 1
+  minAmount: 1
+  maxAmount: 1
+  minTorque: 50
+  maxTorque: 100
   minSize: 0.25
-  maxSize: 1
+  maxSize: 0.5
+  spawnTarget: {fileID: 375486257}
+  minForce: 100
+  maxForce: 400
 --- !u!1 &2066606301
 GameObject:
   m_ObjectHideFlags: 0

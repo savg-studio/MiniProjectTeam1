@@ -5,12 +5,10 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject objecToSpawn;
-    public bool oneTime = false;
-    public bool instant = true;
-    public float minSpawnInterval = 4f;
-    public float maxSpawnInterval = 8f;
+    public GameObject objectToSpawn;
     public float chanceToSpawn = 0.75f;
+    public uint minAmount;
+    public uint maxAmount;
 
     private BoxCollider2D boxCollider;
 
@@ -18,15 +16,12 @@ public class Spawn : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
 
-        float firstSpawnTime = instant ? 0 : GetNextSpawnTime();
-        Invoke("SpawnObject", firstSpawnTime);
-
         OnStart();
     }
 
     protected virtual void OnStart()
     {
-
+        SpawnObjects();
     }
 
     // Update is called once per frame
@@ -35,32 +30,35 @@ public class Spawn : MonoBehaviour
         
     }
 
-    void SpawnObject()
+    public void SpawnObjects()
     {
-        if (DoSpawn())
-        {
-            Vector3 spawnPoint = GetRandomPointInBounds();
-            var go = GameObject.Instantiate(objecToSpawn, spawnPoint, Quaternion.identity);
+        // Spawns minimum amount
+        for (uint i = 0; i < minAmount; i++)
+            SpawnObject();
 
-            OnSpawn(go);
-        }
+        for (uint i = minAmount; i < maxAmount; i++)
+            if (ShouldSpawn())
+                SpawnObject();
 
-        if (!oneTime)
-        {
-            float nextSpawnTime = Random.Range(minSpawnInterval, maxSpawnInterval);
-            Invoke("SpawnObject", nextSpawnTime);
-        }
+        OnSpawnObjects();
+    }
+    protected virtual void OnSpawnObjects()
+    {
+
     }
 
-    private bool DoSpawn()
+    protected void SpawnObject()
     {
-        float roll = Random.Range(0, 1);
-        return ShouldSpawn() && roll < chanceToSpawn;
+        Vector3 spawnPoint = GetRandomPointInBounds();
+        var go = GameObject.Instantiate(objectToSpawn, spawnPoint, Quaternion.identity);
+
+        OnSpawn(go);
     }
 
-    private float GetNextSpawnTime()
+    private bool ShouldSpawn()
     {
-        return Random.Range(minSpawnInterval, maxSpawnInterval);
+        float roll = Random.Range(0f, 1f);
+        return OnShouldSpawn() && roll < chanceToSpawn;
     }
 
     protected virtual void OnSpawn(GameObject go)
@@ -68,7 +66,7 @@ public class Spawn : MonoBehaviour
             
     }
 
-    protected virtual bool ShouldSpawn()
+    protected virtual bool OnShouldSpawn()
     {
         return true;
     }
