@@ -136,6 +136,15 @@ public class Player : MonoBehaviour
     }
 
     // Movement
+
+    public Vector2 GetVelocity()
+    {
+        Vector2 dir = GetCurrentDirection();
+        Vector2 velocity = dir * speed * Time.deltaTime;
+
+        return velocity;
+    }    
+
     private void Rotate(Vector3 rotation)
     {
         // Updates rigidbody velocity
@@ -156,7 +165,7 @@ public class Player : MonoBehaviour
         rigidBody2D.angularVelocity = 0;
     }
 
-    Vector2 GetCurrentDirection()
+    private Vector2 GetCurrentDirection()
     {
         Vector3 currentRotation = transform.rotation.eulerAngles;
         Vector2 dir = T1Utils.AngleToVector2(currentRotation.z);

@@ -4,46 +4,82 @@ using UnityEngine;
 
 public class SteeringAgent : MonoBehaviour
 {
+    // Var
     public float maxForce;
     public float maxSpeed;
 
-    // Objective
-    public GameObject objective;
+    public float circleRadius;
+    public float circleDistance;
+    public float angleChange;
 
     // Cache components
-    private Rigidbody2D rigidbody;
+    protected Rigidbody2D rigidbody;
 
     // Inner
-    private Vector2 currentVelocity;
+    protected Vector2 currentVelocity;
+    protected float wanderAngle;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         currentVelocity = new Vector2(1, 0) * maxSpeed;
+        wanderAngle = 15f;
+
+        OnStart();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void OnStart()
     {
-        currentVelocity = CalculateSteering(currentVelocity);
-        Vector2 newPosition = GetPos() + currentVelocity;
-        Move(newPosition);
+
+    }
+
+    void FixedUpdate()
+    {
+        var steering = CalculateSteering();
+
+        steering = Truncate(steering, maxForce);
+        currentVelocity = Truncate(steering + currentVelocity, maxSpeed);
+        Vector2 newPos = GetPos() + currentVelocity;
+
+        Move(newPos);
         FaceCurrentDir();
     }
 
-    private Vector2 CalculateSteering(Vector2 velocity)
+    protected virtual Vector2 CalculateSteering()
     {
-        var desiredVelocity = (GetTargetPos() - GetPos()).normalized * maxSpeed;
-        var steering = desiredVelocity - currentVelocity;
-        steering = Truncate(steering, maxForce);
-
-        velocity = Truncate(steering + velocity, maxSpeed);
-
-        return velocity;
+        return Vector2.zero;
     }
 
-    private Vector2 Truncate(Vector2 steering, float maxForce)
+    protected Vector2 Seek(Vector2 targetPos)
+    {
+        var desiredVelocity = (targetPos - GetPos()).normalized * maxSpeed;
+        var steering = desiredVelocity - currentVelocity;
+
+        return steering;
+    }
+
+    protected Vector2 Pursuit(Vector2 targetPos, Vector2 targetVelocity)
+    {
+        var dist = (targetPos - GetPos()).magnitude;
+        int T = Mathf.RoundToInt(dist / maxSpeed);
+        Vector2 newTargetPos = targetPos + targetVelocity * T;
+
+        return Seek(newTargetPos);
+    }
+
+    protected Vector2 Wander()
+    {
+        var displacement = T1Utils.AngleToVector2(wanderAngle) * circleRadius;
+        wanderAngle += Random.Range(-0.5f, 0.5f) * angleChange;
+
+        var circleCenter = currentVelocity.normalized * circleDistance;
+        var wanderForce = circleCenter + displacement;
+
+        return wanderForce;
+    }
+
+    protected Vector2 Truncate(Vector2 steering, float maxForce)
     {
         float magnitude = steering.magnitude;
         float force = Mathf.Min(magnitude, maxForce);
@@ -51,13 +87,8 @@ public class SteeringAgent : MonoBehaviour
 
         return capped;
     }
-        
-    private Vector2 GetTargetPos()
-    {
-        return objective.transform.position;
-    }
 
-    private Vector2 GetPos()
+    protected Vector2 GetPos()
     {
         return transform.position;
     }
@@ -70,7 +101,7 @@ public class SteeringAgent : MonoBehaviour
         rigidbody.SetRotation(angle);
     }
 
-    private void Move(Vector2 pos)
+    protected void Move(Vector2 pos)
     {
         rigidbody.MovePosition(pos);
     }    
