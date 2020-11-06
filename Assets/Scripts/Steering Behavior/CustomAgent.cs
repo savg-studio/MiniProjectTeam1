@@ -6,7 +6,7 @@ public class CustomAgent : SteeringAgent
 {
     // Objective
     public Player objective;
-
+    public GameObject posTarget;
 
 
     protected override void OnStart()
@@ -17,8 +17,9 @@ public class CustomAgent : SteeringAgent
     // Update is called once per frame
     protected override Vector2 CalculateSteering()
     {
-        //return Pursuit(GetTargetPos(), objective.GetVelocity());
-        return Wander();
+        return Wander() + CollisionAvoidance();
+        //return Wander() + CollisionAvoidance();
+        //return Seek(posTarget.transform.position) + CollisionAvoidance();
     }
 
     protected Vector2 GetTargetPos()

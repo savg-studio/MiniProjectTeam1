@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 306646787676801413}
   - component: {fileID: 306646787676801412}
   - component: {fileID: 306646787676801411}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpaceTrash
   m_TagString: Untagged
   m_Icon: {fileID: 0}

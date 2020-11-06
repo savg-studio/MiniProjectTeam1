@@ -4,27 +4,31 @@ using UnityEngine;
 
 public class SteeringAgent : MonoBehaviour
 {
-    // Var
+    // Seek
     public float maxForce;
     public float maxSpeed;
 
+    // Wander
     public float circleRadius;
     public float circleDistance;
-    public float angleChange;
+    public float turnChance;
+    private Vector2 wanderForce;
+
+    // CollisionAvoidance
+    public float ahead;
+    public float avoidanceForce;
 
     // Cache components
     protected Rigidbody2D rigidbody;
 
     // Inner
     protected Vector2 currentVelocity;
-    protected float wanderAngle;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         currentVelocity = new Vector2(1, 0) * maxSpeed;
-        wanderAngle = 15f;
 
         OnStart();
     }
@@ -32,6 +36,11 @@ public class SteeringAgent : MonoBehaviour
     protected virtual void OnStart()
     {
 
+    }
+
+    private void Update()
+    {
+        FaceCurrentDir();
     }
 
     void FixedUpdate()
@@ -43,7 +52,6 @@ public class SteeringAgent : MonoBehaviour
         Vector2 newPos = GetPos() + currentVelocity;
 
         Move(newPos);
-        FaceCurrentDir();
     }
 
     protected virtual Vector2 CalculateSteering()
@@ -70,13 +78,38 @@ public class SteeringAgent : MonoBehaviour
 
     protected Vector2 Wander()
     {
-        var displacement = T1Utils.AngleToVector2(wanderAngle) * circleRadius;
-        wanderAngle += Random.Range(-0.5f, 0.5f) * angleChange;
+        var value = Random.value;
+        if (value < turnChance)
+        {
+            var circleCenter = currentVelocity.normalized * circleDistance;
+            var randomPoint = Random.insideUnitCircle;
+            var displacement = randomPoint * circleRadius;
+            displacement = Quaternion.LookRotation(currentVelocity) * displacement;
 
-        var circleCenter = currentVelocity.normalized * circleDistance;
-        var wanderForce = circleCenter + displacement;
+            wanderForce = circleCenter + displacement;
+        }
 
-        return wanderForce;
+        return Seek(wanderForce);
+    }
+
+    protected Vector2 CollisionAvoidance()
+    {
+        Vector2 avoidance = Vector2.zero;
+
+        Vector2 origin = GetPos();
+        Vector2 dir = currentVelocity.normalized;
+        float distance = (currentVelocity.magnitude / maxSpeed) * ahead;
+        LayerMask obstacles = LayerMask.GetMask("Obstacles", "Boundaries");
+
+        var hit = Physics2D.Raycast(origin, dir, distance, obstacles);
+        Debug.DrawRay(origin, dir * distance);
+        if(hit.collider)
+        {
+            Debug.Log("Detected obstacle " + hit.collider.gameObject.name);
+            avoidance = hit.normal * avoidanceForce;
+        }
+
+        return avoidance;
     }
 
     protected Vector2 Truncate(Vector2 steering, float maxForce)
