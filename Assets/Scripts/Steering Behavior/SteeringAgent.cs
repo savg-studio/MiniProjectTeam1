@@ -21,6 +21,10 @@ public class SteeringAgent : MonoBehaviour
     // Cache components
     protected Rigidbody2D rigidbody;
 
+    // Cache gameobjects
+    protected GameObject leftWing;
+    protected GameObject rightWing;
+
     // Inner
     protected Vector2 currentVelocity;
 
@@ -29,6 +33,8 @@ public class SteeringAgent : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         currentVelocity = new Vector2(1, 0) * maxSpeed;
+        leftWing = transform.Find("Left").gameObject;
+        rightWing = transform.Find("Right").gameObject;
 
         OnStart();
     }
@@ -96,17 +102,33 @@ public class SteeringAgent : MonoBehaviour
     {
         Vector2 avoidance = Vector2.zero;
 
-        Vector2 origin = GetPos();
+        Vector2 originLeft = leftWing.transform.position;
+        Vector2 originRight = rightWing.transform.position;
         Vector2 dir = currentVelocity.normalized;
         float distance = (currentVelocity.magnitude / maxSpeed) * ahead;
         LayerMask obstacles = LayerMask.GetMask("Obstacles", "Boundaries");
 
-        var hit = Physics2D.Raycast(origin, dir, distance, obstacles);
-        Debug.DrawRay(origin, dir * distance);
-        if(hit.collider)
+        var hitLeft = Physics2D.Raycast(originLeft, dir, distance, obstacles);
+        Debug.DrawRay(originLeft, dir * distance);
+        var hitRight = Physics2D.Raycast(originRight, dir, distance, obstacles);
+        Debug.DrawRay(originRight, dir * distance);
+
+        if (hitLeft.collider || hitRight.collider)
         {
-            Debug.Log("Detected obstacle " + hit.collider.gameObject.name);
-            avoidance = hit.normal * avoidanceForce;
+            RaycastHit2D hit;
+            if (hitLeft.collider && !hitRight.collider)
+                hit = hitLeft;
+            else if (hitRight.collider && !hitLeft.collider)
+                hit = hitRight;
+            else
+                hit = hitLeft.distance < hitRight.distance ? hitLeft : hitRight;
+            
+            var surfaceNormal = hit.normal;
+            var perp = Vector2.Perpendicular(surfaceNormal);
+            var perp2 = -perp;
+
+            var goodPerp = Vector2.Dot(dir, perp) > Vector2.Dot(dir, perp2) ? perp : perp2;
+            avoidance = goodPerp * avoidanceForce;
         }
 
         return avoidance;
