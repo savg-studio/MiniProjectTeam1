@@ -5,11 +5,17 @@ using UnityEngine;
 public class Spaceship : MonoBehaviour
 {
     public WeaponBase weapon;
+    public float stunDuration = 0.75f;
 
-    // Start is called before the first frame update
-    void Start()
+    // State
+    protected bool stunned = false;
+
+    // Cache
+    private SteeringAgent agent;
+
+    private void Start()
     {
-        
+        agent = GetComponent<SteeringAgent>();
     }
 
     // Update is called once per frame
@@ -18,9 +24,21 @@ public class Spaceship : MonoBehaviour
         
     }
 
-    public void Stun()
+    void FixedUpdate()
     {
+        if(!stunned)
+            agent.FixedUpdateAgent();    
+    }
 
+    public virtual void Stun()
+    {
+        stunned = true;
+        Invoke("RecoverStun", stunDuration);
+    }
+
+    public void RecoverStun()
+    {
+        stunned = false;
     }
 
     public virtual Vector2 GetFacingDir()

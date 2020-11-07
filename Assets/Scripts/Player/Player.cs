@@ -29,8 +29,6 @@ public class Player : Spaceship
     public float laserRecoilDuration;
 
     // Stun effects
-    public float stunDuration;
-    private bool stunned = false;
 
     // Invulnerability
     public float invulnerabilityDuration;
@@ -230,7 +228,7 @@ public class Player : Spaceship
     }
 
     // Stun
-    public void Stun()
+    public override void Stun()
     {
         stunned = true;
         Invoke("Recover", stunDuration);

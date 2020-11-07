@@ -23,7 +23,7 @@ public class Shockwave : Explosion
         var rigidBody = collision.attachedRigidbody;
 
         var spaceship = collision.gameObject.GetComponent<Spaceship>();
-        if (spaceship)
+        if (spaceship && spaceship.gameObject.layer != LayerMask.NameToLayer("Player"))
             spaceship.Stun();
 
         AddExplosionForce(rigidBody);

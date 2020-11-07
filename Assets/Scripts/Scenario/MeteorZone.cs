@@ -30,6 +30,8 @@ public class MeteorZone : MonoBehaviour
             meteors.Remove(meteor);
             Destroy(meteor.gameObject);
         }
+
+        //Destroy(collision.gameObject);
     }
     public void AddMeteor(Meteor ms)
     {

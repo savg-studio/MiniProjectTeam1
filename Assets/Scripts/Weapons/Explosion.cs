@@ -24,13 +24,18 @@ public class Explosion : MonoBehaviour
 
     protected void AddExplosionForce(Rigidbody2D rigidBody)
     {
+        BeforeImpactObject(rigidBody.gameObject);
         T1Utils.AddExplosionForce(rigidBody, explosionForce, center, radius, mode);
     }
 
-    protected void Explode()
+    protected virtual void BeforeImpactObject(GameObject go)
     {
-        var layerMask = LayerMask.GetMask("Obstacles");
-        var colliders = Physics2D.OverlapCircleAll(center, radius, layerMask);
+
+    }
+
+    protected void Explode(LayerMask mask)
+    {
+        var colliders = Physics2D.OverlapCircleAll(center, radius, mask);
 
         foreach(var collider in colliders)
         {

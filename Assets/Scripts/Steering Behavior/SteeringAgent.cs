@@ -44,12 +44,12 @@ public class SteeringAgent : MonoBehaviour
 
     }
 
-    private void Update()
+    public void Update()
     {
         FaceCurrentDir();
     }
 
-    void FixedUpdate()
+    public void FixedUpdateAgent()
     {
         var steering = CalculateSteering();
 

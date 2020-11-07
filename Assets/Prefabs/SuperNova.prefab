@@ -228,3 +228,6 @@ MonoBehaviour:
   mode: 1
   explosionDelay: 3
   targetColor: {r: 1, g: 1, b: 1, a: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 20736

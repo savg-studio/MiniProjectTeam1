@@ -8,6 +8,7 @@ public class SuperNova : Explosion
     public float explosionDelay;
     private float explosionTimeLeft;
     public Color targetColor;
+    public LayerMask mask;
 
     // Cache
     private GameObject circleSprite;
@@ -41,7 +42,7 @@ public class SuperNova : Explosion
 
         if (IsTimeOver())
         {
-            Explode();
+            Explode(mask);
             OnExplode();
         }
     }
@@ -74,5 +75,12 @@ public class SuperNova : Explosion
         color.a = 1;
         circleSpriteRenderer.color = color;
         outlineSpriteRenderer.color = color;
+    }
+
+    protected override void BeforeImpactObject(GameObject go)
+    {
+        var spaceship = go.GetComponent<Spaceship>();
+        if (spaceship)
+            spaceship.Stun();
     }
 }
