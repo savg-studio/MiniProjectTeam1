@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Spaceship
 {
     // UI
     public ArmorDisplay display;
@@ -22,9 +22,8 @@ public class Player : MonoBehaviour
     private bool dashing = false;
     private bool dashInCooldown = false;
 
-    // Laser
-    public float laserDuration;
-    public float laserInterval;
+    // Laser Recoil
+    private bool inRecoil = false;
     public bool laserRecoilEnabled;
     public float laserRecoilForce;
     public float laserRecoilDuration;
@@ -36,10 +35,6 @@ public class Player : MonoBehaviour
     // Invulnerability
     public float invulnerabilityDuration;
     private bool invulnerable = false;
-
-    // Laser
-    private bool laserReady = true;
-    private bool inRecoil = false;
 
     // HP
     public uint maxArmor;
@@ -57,14 +52,12 @@ public class Player : MonoBehaviour
 
     // GameObjects
     private GameObject sprite;
-    private GameObject attack;
 
     // Start is called before the first frame update
     void Start()
     {
         // GameObjects
         sprite = transform.Find("Sprite").gameObject;
-        attack = transform.Find("Attack").gameObject;
         shieldGO = transform.Find("Shield").gameObject;
 
         // Components
@@ -74,6 +67,9 @@ public class Player : MonoBehaviour
 
         // Main values
         currentArmor = maxArmor;
+
+        // Set owner
+        SetWeapon(weapon);
 
         // UI
         display.SetMaxArmor(maxArmor);
@@ -100,9 +96,9 @@ public class Player : MonoBehaviour
         if(!stunned)
         {
             // Attack
-            if(Input.GetButton("Fire1") && CanLaser())
+            if(Input.GetButton("Fire1") && WeaponReady())
             {
-                Laser();
+                weapon.Use();
             }
         }
 
@@ -133,6 +129,13 @@ public class Player : MonoBehaviour
         Vector3 currentRotation = transform.rotation.eulerAngles;
         float newZRotation = currentRotation.z - Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
         return new Vector3(currentRotation.x, currentRotation.y, newZRotation);
+    }
+
+    // Spacechip
+
+    public override Vector2 GetFacingDir()
+    {
+        return GetCurrentDirection();
     }
 
     // Movement
@@ -201,16 +204,7 @@ public class Player : MonoBehaviour
         dashInCooldown = false;
     }
 
-    // Laser
-    private void StopLaser()
-    {
-        attack.SetActive(false);
-    }
-
-    private void RecoverLaser()
-    {
-        laserReady = true;
-    }
+    // Weapon
 
     private void Recoil()
     {
@@ -230,25 +224,13 @@ public class Player : MonoBehaviour
         return recoilDir;
     }
 
-    private bool CanLaser()
+    private bool WeaponReady()
     {
-        return laserReady;
-    }
-
-    private void Laser()
-    {
-        attack.SetActive(true);
-        laserReady = false;
-        if (laserRecoilEnabled)
-            Recoil();
-
-        Invoke("StopLaser", laserDuration);
-        Invoke("RecoverLaser", laserInterval);
-        Invoke("RecoverFromRecoil", laserRecoilDuration);
+        return !weapon.IsInCooldown();
     }
 
     // Stun
-    private void Stun(Projectile p)
+    public void Stun()
     {
         stunned = true;
         Invoke("Recover", stunDuration);
@@ -332,7 +314,7 @@ public class Player : MonoBehaviour
         }
         else if (!invulnerable)
         {
-            Stun(p);
+            Stun();
             TakeDamage();
             StartInvulnerability();
 
