@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shockwave : Projectile
+public class Shockwave : Explosion
 {
-    // Params
-    public float explosionForce;
-    public ForceMode2D mode;
+    // Projectile
+    private Projectile projectile;
 
-    // Cache vars
-    private Vector2 center;
-    private float radius;
-
-    // Cache components
-    private CircleCollider2D circle;
-
-    private void Start()
+    public void Init()
     {
-        circle = GetComponent<CircleCollider2D>();
-        center = (Vector2)gameObject.transform.position + circle.offset;
-        radius = circle.radius;
+        projectile = GetComponent<Projectile>();
+        projectile.Init();
+    }
+
+    public void Launch(Vector2 dir, float force, ForceMode2D mode)
+    {
+        projectile.Launch(dir, force, mode);
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -30,22 +26,11 @@ public class Shockwave : Projectile
         if (spaceship)
             spaceship.Stun();
 
-        ExplodeObject(rigidBody, explosionForce, center, radius, mode);
+        AddExplosionForce(rigidBody);
     }
 
-    private void ExplodeObject(Rigidbody2D rigidbody, float explosionForce, Vector2 explosionCenter, float explosionRadius, ForceMode2D mode)
+    private void OnBecameInvisible()
     {
-        Vector2 objectPos = rigidbody.transform.position;
-        var distV = objectPos - explosionCenter;
-
-        var dist = distV.magnitude;
-        var forceDir = distV.normalized;
-
-        var finalForce = explosionForce / dist;
-        var force = forceDir * finalForce;
-
-        rigidbody.AddForce(force, mode);
+        GameObject.Destroy(this.gameObject);
     }
-
-    
 }

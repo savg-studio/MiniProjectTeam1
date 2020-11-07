@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &360610517706622384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3108245141243304976}
+  m_Layer: 0
+  m_Name: SuperNovaWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3108245141243304976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360610517706622384}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.4500002, y: -0.000000037252903, z: 0}
+  m_LocalScale: {x: 2.4999993, y: 2.4999993, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6927401035724097118}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1758602060284703368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4933800593852421653}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4933800593852421653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758602060284703368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6927401033689824490}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6927401033613424361
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6927401033689824490}
+  - component: {fileID: 1567796102}
   m_Layer: 8
   m_Name: ForceWaveWeapon
   m_TagString: Untagged
@@ -124,10 +185,28 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4933800593852421653}
   m_Father: {fileID: 6927401035724097118}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1567796102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927401033689824491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae114d39b600c28409a83db03ea0dfa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownDuration: 1
+  owner: {fileID: 0}
+  shockwaveGo: {fileID: 820861751899836111, guid: 1e2b04dfcb18bab45a1937b1662fd983,
+    type: 3}
+  launchForce: 50
 --- !u!1 &6927401033837697422
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownDuration: 1
-  owner: {fileID: 6927401035724097089}
+  owner: {fileID: 0}
   laserDuration: 0.15
 --- !u!1 &6927401035367694538
 GameObject:
@@ -419,6 +498,7 @@ Transform:
   - {fileID: 6927401035367694537}
   - {fileID: 6927401034751017272}
   - {fileID: 6927401033689824490}
+  - {fileID: 3108245141243304976}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -434,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3824697a1b2102a448a586cbccec3b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: {fileID: 1567796102}
   display: {fileID: 0}
   maxSpeed: 6
   minSpeed: 2
@@ -442,7 +523,6 @@ MonoBehaviour:
   dashForce: 0.5
   dashDuration: 0.2
   dashCooldown: 2
-  weapon: {fileID: 6927401034751017271}
   laserRecoilEnabled: 0
   laserRecoilForce: 0
   laserRecoilDuration: 0.5

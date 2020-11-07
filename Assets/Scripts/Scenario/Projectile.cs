@@ -9,15 +9,7 @@ public class Projectile : MonoBehaviour
     protected float baseMass;
     protected float baseSize;
 
-    void Start()
-    {
-    }
-
     // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void Init()
     {

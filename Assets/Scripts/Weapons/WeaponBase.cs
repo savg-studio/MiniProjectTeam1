@@ -66,4 +66,10 @@ public class WeaponBase : MonoBehaviour
     {
 
     }
+
+    // Sandbox
+    protected Vector2 GetOwnerPos()
+    {
+        return owner.gameObject.transform.position;
+    }
 }

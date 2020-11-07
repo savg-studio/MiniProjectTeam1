@@ -28,4 +28,18 @@ public static class T1Utils
     {
         return Vector2ToAngleRads(vector) * Mathf.Rad2Deg;
     }
+
+    public static void AddExplosionForce(Rigidbody2D rigidbody, float explosionForce, Vector2 explosionCenter, float explosionRadius, ForceMode2D mode)
+    {
+        Vector2 objectPos = rigidbody.transform.position;
+        var distV = objectPos - explosionCenter;
+
+        var dist = distV.magnitude;
+        var forceDir = distV.normalized;
+
+        var finalForce = explosionForce / dist;
+        var force = forceDir * finalForce;
+
+        rigidbody.AddForce(force, mode);
+    }
 }
