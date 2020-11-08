@@ -59,25 +59,4 @@ public class Projectile : MonoBehaviour
     {
         return rigidbody2D.centerOfMass;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        var player = collision.gameObject.GetComponent<Player>();
-
-        if (player)
-        {
-            player.CollideWith(this, collision);
-        }
-
-        OnCollide(collision);
-    }
-
-    public virtual void OnCollide(Collision2D collision)
-    {
-
-    }
-
-    private void OnBecameInvisible()
-    {
-    }
 }

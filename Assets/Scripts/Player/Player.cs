@@ -178,9 +178,4 @@ public class Player : Spaceship
     {
 
     }
-
-    // Collision
-    public void CollideWith(Projectile p, Collision2D collision)
-    {
-    }
 }

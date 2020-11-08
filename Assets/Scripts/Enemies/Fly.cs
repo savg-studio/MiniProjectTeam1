@@ -74,7 +74,6 @@ public class Fly : AISpaceship
 
         if (potentialPlayer && !HasFlag(SpaceshipStateFlags.DEAD))
         {
-            potentialPlayer.Stun();
             potentialPlayer.TakeDamage();
 
             this.Die();

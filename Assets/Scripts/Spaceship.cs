@@ -112,6 +112,7 @@ public class Spaceship : MonoBehaviour
                 shield.Disable();
             }
 
+            Stun();
             OnDamageTaken();
         }
     }
