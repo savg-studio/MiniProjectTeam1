@@ -234,6 +234,9 @@ MonoBehaviour:
   turnChance: 0.05
   ahead: 4
   avoidanceForce: 0.05
+  mask:
+    serializedVersion: 2
+    m_Bits: 82688
   isStopped: 0
   isRotationStopped: 0
 --- !u!114 &3036161783521544626
@@ -252,7 +255,8 @@ MonoBehaviour:
   stunDuration: 0.75
   invulnerabilityDuration: 0.75
   maxArmor: 1
-  frames: 90
+  frames: 30
+  scaleByDist: 0
 --- !u!111 &3036161783521544629
 Animation:
   m_ObjectHideFlags: 0

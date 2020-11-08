@@ -14,8 +14,6 @@ public class MeteorSpawn : SpaceTrashSpawn
     protected override void OnStart()
     {        
         meteorZone = spawnTarget.GetComponent<MeteorZone>();
-
-        base.OnStart();
     }
 
     override protected void OnSpawn(GameObject go) 

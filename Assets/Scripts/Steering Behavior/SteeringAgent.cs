@@ -17,6 +17,7 @@ public class SteeringAgent : MonoBehaviour
     // CollisionAvoidance
     public float ahead;
     public float avoidanceForce;
+    public LayerMask mask;
 
     // Cache components
     protected Rigidbody2D rigidbody;

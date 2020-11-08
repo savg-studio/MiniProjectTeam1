@@ -12,7 +12,7 @@ public class Spawn : MonoBehaviour
 
     private BoxCollider2D boxCollider;
 
-    void Start()
+    public void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
 
