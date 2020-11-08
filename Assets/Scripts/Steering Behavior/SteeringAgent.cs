@@ -141,11 +141,11 @@ public class SteeringAgent : MonoBehaviour
         Vector2 originRight = rightWing.transform.position;
         Vector2 dir = currentVelocity.normalized;
         float distance = (currentVelocity.magnitude / maxSpeed) * ahead;
-        LayerMask obstacles = LayerMask.GetMask("Obstacles", "Boundaries");
+        
 
-        var hitLeft = Physics2D.Raycast(originLeft, dir, distance, obstacles);
+        var hitLeft = Physics2D.Raycast(originLeft, dir, distance, mask);
         Debug.DrawRay(originLeft, dir * distance);
-        var hitRight = Physics2D.Raycast(originRight, dir, distance, obstacles);
+        var hitRight = Physics2D.Raycast(originRight, dir, distance, mask);
         Debug.DrawRay(originRight, dir * distance);
 
         if (hitLeft.collider || hitRight.collider)
