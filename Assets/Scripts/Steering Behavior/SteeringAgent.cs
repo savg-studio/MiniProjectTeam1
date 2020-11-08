@@ -27,6 +27,7 @@ public class SteeringAgent : MonoBehaviour
 
     // Inner
     protected Vector2 currentVelocity;
+    protected Vector2 currentSteering;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -44,20 +45,21 @@ public class SteeringAgent : MonoBehaviour
 
     }
 
-    public void Update()
+    public void UpdateAgent()
     {
         FaceCurrentDir();
     }
 
     public void FixedUpdateAgent()
     {
-        var steering = CalculateSteering();
-
+        var steering = currentSteering;
         steering = Truncate(steering, maxForce);
         currentVelocity = Truncate(steering + currentVelocity, maxSpeed);
         Vector2 newPos = GetPos() + currentVelocity;
 
         Move(newPos);
+
+        ResetSteering();
     }
 
     protected virtual Vector2 CalculateSteering()
@@ -65,7 +67,17 @@ public class SteeringAgent : MonoBehaviour
         return Vector2.zero;
     }
 
-    protected Vector2 Seek(Vector2 targetPos)
+    protected void ResetSteering()
+    {
+        currentSteering = Vector2.zero;
+    }
+
+    public void Seek(Vector2 targetPos)
+    {
+        currentSteering += targetPos;
+    }
+
+    protected Vector2 GetSeekForce(Vector2 targetPos)
     {
         var desiredVelocity = (targetPos - GetPos()).normalized * maxSpeed;
         var steering = desiredVelocity - currentVelocity;
@@ -73,16 +85,26 @@ public class SteeringAgent : MonoBehaviour
         return steering;
     }
 
-    protected Vector2 Pursuit(Vector2 targetPos, Vector2 targetVelocity)
+    public void Pursuit(Vector2 targetPos, Vector2 targetVelocity)
+    {
+        currentSteering += GetPursuitForce(targetPos, targetVelocity);
+    }
+
+    protected Vector2 GetPursuitForce(Vector2 targetPos, Vector2 targetVelocity)
     {
         var dist = (targetPos - GetPos()).magnitude;
         int T = Mathf.RoundToInt(dist / maxSpeed);
         Vector2 newTargetPos = targetPos + targetVelocity * T;
 
-        return Seek(newTargetPos);
+        return GetSeekForce(newTargetPos);
     }
 
-    protected Vector2 Wander()
+    public void Wander()
+    {
+        currentSteering += GetWanderForce();
+    }
+
+    protected Vector2 GetWanderForce()
     {
         var value = Random.value;
         if (value < turnChance)
@@ -95,7 +117,7 @@ public class SteeringAgent : MonoBehaviour
             wanderForce = circleCenter + displacement;
         }
 
-        return Seek(wanderForce);
+        return GetSeekForce(wanderForce);
     }
 
     protected Vector2 CollisionAvoidance()

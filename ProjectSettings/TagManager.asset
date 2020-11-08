@@ -15,7 +15,7 @@ TagManager:
   - 
   - Spaceships
   - Boundaries
-  - EnemyProjectile
+  - Projectile
   - Enemy
   - Player
   - PlayerShield

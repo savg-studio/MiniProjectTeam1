@@ -70,9 +70,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3177536937977997238}
   - component: {fileID: 3177536937977997239}
-  - component: {fileID: 3177536937977997237}
-  - component: {fileID: 1607256788}
   - component: {fileID: 394474904805182470}
+  - component: {fileID: 5503407300639066297}
+  - component: {fileID: 2556002432949512384}
   m_Layer: 8
   m_Name: Fly
   m_TagString: Untagged
@@ -118,40 +118,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3177536937977997237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177536937977997232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e788923b699e74ebc13a5133a34356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxForce: 0.005
-  maxSpeed: 0.03
-  circleRadius: 1
-  circleDistance: 4
-  turnChance: 0.05
-  ahead: 4
-  avoidanceForce: 0.05
-  objective: {fileID: 0}
-  posTarget: {fileID: 0}
---- !u!114 &1607256788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177536937977997232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2714fb064bde543ba9b5b0615efb27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 0}
 --- !u!60 &394474904805182470
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -182,6 +148,40 @@ PolygonCollider2D:
       - {x: -0.26706925, y: -0.6935593}
       - {x: 0.690415, y: -0.07778233}
       - {x: 0.6688261, y: 0.2577023}
+--- !u!114 &5503407300639066297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177536937977997232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9902d20e1323fe4db664d6202696434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  stunDuration: 0.75
+  maxArmor: 1
+--- !u!114 &2556002432949512384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177536937977997232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8b7bb50e3eca34aaf851a65059984d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxForce: 0.005
+  maxSpeed: 0.03
+  circleRadius: 1
+  circleDistance: 4
+  turnChance: 0.05
+  ahead: 4
+  avoidanceForce: 0.05
 --- !u!1 &3177536939905592587
 GameObject:
   m_ObjectHideFlags: 0

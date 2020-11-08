@@ -34,10 +34,6 @@ public class Player : Spaceship
     public float invulnerabilityDuration;
     private bool invulnerable = false;
 
-    // HP
-    public uint maxArmor;
-    private uint currentArmor;
-
     // Shields
     public float shieldCooldown;
     private GameObject shieldGO;
@@ -62,9 +58,6 @@ public class Player : Spaceship
         rigidBody2D = GetComponent<Rigidbody2D>();
         blinkAnimation = GetComponentInChildren<Animation>();
         spriteRenderer = sprite.GetComponent<SpriteRenderer>();
-
-        // Main values
-        currentArmor = maxArmor;
 
         // Set owner
         SetWeapon(weapon);
@@ -91,7 +84,7 @@ public class Player : Spaceship
                 speed = baseSpeed;
         }
 
-        if(!stunned)
+        if(!HasFlag(SpaceshipStateFlags.STUNNED))
         {
             // Attack
             if(Input.GetButton("Fire1") && WeaponReady())
@@ -111,10 +104,10 @@ public class Player : Spaceship
 
     void FixedUpdate()
     {
-        if (!stunned)
+        if (!HasFlag(SpaceshipStateFlags.STUNNED))
             ResetAngularVelocity();
 
-        if (!dashing && !stunned && !inRecoil)
+        if (!dashing && !HasFlag(SpaceshipStateFlags.STUNNED) && !inRecoil)
         {
             Vector3 newRotation = GetInputRotation();
             Rotate(newRotation);
@@ -230,13 +223,13 @@ public class Player : Spaceship
     // Stun
     public override void Stun()
     {
-        stunned = true;
+        SetFlag(SpaceshipStateFlags.STUNNED);
         Invoke("Recover", stunDuration);
     }
 
     private void Recover()
     {
-        stunned = false;
+        RemoveFlag(SpaceshipStateFlags.STUNNED);
     }
 
     // Invulnerability
@@ -256,13 +249,8 @@ public class Player : Spaceship
     }
 
     // HP
-    private void TakeDamage()
+    public override void TakeDamage()
     {
-        if (currentArmor == 0)
-            Die();
-        else
-            currentArmor--;
-
         display.SetCurrentArmor(currentArmor);
     }
 
@@ -295,7 +283,7 @@ public class Player : Spaceship
         shieldTimeLeft -= Time.deltaTime;
     }
 
-    private void Die()
+    protected override void OnDeath()
     {
 
     }
