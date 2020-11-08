@@ -28,14 +28,22 @@ public class SteeringAgent : MonoBehaviour
     // Inner
     protected Vector2 currentVelocity;
     protected Vector2 currentSteering;
+    public bool isStopped;
+    public bool isRotationStopped;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        // Cache
         rigidbody = GetComponent<Rigidbody2D>();
-        currentVelocity = new Vector2(1, 0) * maxSpeed;
         leftWing = transform.Find("Left").gameObject;
         rightWing = transform.Find("Right").gameObject;
+
+        // Inner
+        currentVelocity = new Vector2(1, 0) * maxSpeed;
+        isStopped = false;
+        isRotationStopped = false;
 
         OnStart();
     }
@@ -47,19 +55,23 @@ public class SteeringAgent : MonoBehaviour
 
     public void UpdateAgent()
     {
-        FaceCurrentDir();
+        if(!isStopped && !isRotationStopped)
+            FaceCurrentDir();
     }
 
     public void FixedUpdateAgent()
     {
-        var steering = currentSteering;
-        steering = Truncate(steering, maxForce);
-        currentVelocity = Truncate(steering + currentVelocity, maxSpeed);
-        Vector2 newPos = GetPos() + currentVelocity;
+        if (!isStopped)
+        {
+            var steering = currentSteering;
+            steering = Truncate(steering, maxForce);
+            currentVelocity = Truncate(steering + currentVelocity, maxSpeed);
+            Vector2 newPos = GetPos() + currentVelocity;
 
-        Move(newPos);
+            Move(newPos);
 
-        ResetSteering();
+            ResetSteering();
+        }
     }
 
     protected void ResetSteering()

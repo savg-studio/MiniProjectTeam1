@@ -2,68 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FlyState
-{
-    WANDER,
-    CHASING_PLAYER
-}
-
 public class Fly : AISpaceship
 {
-    private FlyState state;
+    public float combatSpeed;
 
-    // Cache
-    private PolygonCollider2D collider;
-
-    protected override void OnAIStart()
+    protected override void UpdateOnCombat()
     {
-        state = FlyState.WANDER;
-
-        collider = GetComponent<PolygonCollider2D>();
+        //agent.Pursuit(GetPlayerPos(), player.GetVelocity());
+        agent.Seek(GetPlayerPos());
+        agent.CollisonAvoidance();
     }
 
-    protected override void OnAIFixedUpdate()
+    protected override void OnEnterCombat()
     {
-        switch(state)
-        {
-            case FlyState.WANDER:
-                agent.Wander();
-                agent.CollisonAvoidance();
-                break;
-            case FlyState.CHASING_PLAYER:
-                //agent.Pursuit(GetPlayerPos(), player.GetVelocity());
-                agent.Seek(GetPlayerPos());
-                agent.CollisonAvoidance();
-                break;
-        }
-    }
+        base.OnEnterCombat();
 
-    protected override void OnPlayerFound(Player player)
-    {
-        state = FlyState.CHASING_PLAYER;
-        agent.maxSpeed = 0.05f;
-    }
-
-    protected override void OnDeathAnimationEnd()
-    {
-        base.OnDeathAnimationEnd();
-    }
-
-    protected override void OnDeath()
-    {
-        base.OnDeath();
-
-        collider.enabled = false;
-    }
-
-    protected Vector2 GetPlayerPos()
-    {
-        Vector2 playerPos = Vector2.zero;
-
-        if (player)
-            playerPos = player.transform.position;
-
-        return playerPos;
+        agent.maxSpeed = combatSpeed;
     }
 
     protected override void OnCollision(Collision2D collision)

@@ -32,8 +32,9 @@ public class Spaceship : MonoBehaviour
         // Hp
         currentArmor = maxArmor;
 
-        // Chace
+        // Cache
         shield = GetComponentInChildren<Shield>();
+        SetWeapon(weapon);
 
         OnStart();
     }
@@ -45,7 +46,6 @@ public class Spaceship : MonoBehaviour
 
     void Update()
     {
-
         OnUpdate();
     }
 
@@ -144,6 +144,11 @@ public class Spaceship : MonoBehaviour
     {
         this.weapon = weapon;
         weapon.owner = this;
+    }
+
+    public bool CanUseWeapon()
+    {
+        return !weapon.IsInCooldown() && !HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.STUNNED);
     }
 
 

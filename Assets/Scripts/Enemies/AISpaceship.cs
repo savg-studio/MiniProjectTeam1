@@ -2,28 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AIState
+{
+    WANDER,
+    COMBAT
+}
+
 public class AISpaceship : Spaceship
 {
-    // Public params
-    public float deathSpinningForce;
-
-    // Ai behavior    
+    // Ai behavior 
+    private AIState state;
     protected Player player;
 
     // Cache
     protected SteeringAgent agent;
     protected Rigidbody2D rigidbody2D;
+    private PolygonCollider2D pCollider;
     private Animation deathAnim;
     private float deathAnimationDuration;
 
     protected override void OnStart()
     {
+        state = AIState.WANDER;
+
         // Cache
         agent = GetComponent<SteeringAgent>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        pCollider = GetComponent<PolygonCollider2D>();
         deathAnim = GetComponent<Animation>();
         deathAnimationDuration = deathAnim.GetClip("Death").length;
-
+        
         OnAIStart();
     }
 
@@ -42,6 +50,20 @@ public class AISpaceship : Spaceship
 
     protected virtual void OnAIFixedUpdate()
     {
+        switch (state)
+        {
+            case AIState.WANDER:
+                agent.Wander();
+                agent.CollisonAvoidance();
+                break;
+            case AIState.COMBAT:
+                UpdateOnCombat();
+                break;
+        }
+    }
+
+    protected virtual void UpdateOnCombat()
+    {
 
     }
 
@@ -55,12 +77,13 @@ public class AISpaceship : Spaceship
 
     protected override void OnDeath()
     {
+        pCollider.enabled = false;
+
         StartDeathAnimation();
     }
 
     private void StartDeathAnimation()
     {
-        rigidbody2D.AddTorque(deathSpinningForce);
         deathAnim.Play();
         Invoke("EndDeathAnimation", deathAnimationDuration);
     }
@@ -82,12 +105,14 @@ public class AISpaceship : Spaceship
     protected void PlayerFound(Player player)
     {
         this.player = player;
+        state = AIState.COMBAT;
 
-        OnPlayerFound(player);
+        OnEnterCombat();
     }
 
-    protected virtual void OnPlayerFound(Player player)
+    protected virtual void OnEnterCombat()
     {
+        
     }
 
     // AggroRange
@@ -97,5 +122,16 @@ public class AISpaceship : Spaceship
 
         if (potentialPlayer && player == null)
             PlayerFound(potentialPlayer);
+    }
+
+    // Utils
+    protected Vector2 GetPlayerPos()
+    {
+        Vector2 playerPos = Vector2.zero;
+
+        if (player)
+            playerPos = player.transform.position;
+
+        return playerPos;
     }
 }

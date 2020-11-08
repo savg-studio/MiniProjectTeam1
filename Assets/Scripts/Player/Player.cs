@@ -36,9 +36,6 @@ public class Player : Spaceship
         blinkAnimation = GetComponentInChildren<Animation>();
         spriteRenderer = sprite.GetComponent<SpriteRenderer>();
 
-        // Set owner
-        SetWeapon(weapon);
-
         // UI
         display.SetMaxArmor(maxArmor);
         display.SetCurrentArmor(maxArmor);
