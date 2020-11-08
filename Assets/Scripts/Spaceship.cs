@@ -149,9 +149,14 @@ public class Spaceship : MonoBehaviour
             weapon.owner = this;
     }
 
+    public bool CanUseWeapon(WeaponBase weapon)
+    {
+        return weapon && !weapon.IsInCooldown() && !HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.STUNNED);
+    }
+
     public bool CanUseWeapon()
     {
-        return !weapon.IsInCooldown() && !HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.STUNNED);
+        return weapon && !weapon.IsInCooldown() && !HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.STUNNED);
     }
 
 

@@ -14,6 +14,9 @@ public class Player : Spaceship
     public float rotationSpeed;
     private float speed;
 
+    // Second weapon
+    private WeaponBase secondWeapon;
+
     // Invulnerability
     public float invulnerabilityDuration;
 
@@ -53,13 +56,15 @@ public class Player : Spaceship
             speed = baseSpeed;
      
 
-        if(!HasFlag(SpaceshipStateFlags.STUNNED))
+        // Attack
+        if(Input.GetButton("Fire1") && CanUseWeapon(weapon))
         {
-            // Attack
-            if(Input.GetButton("Fire1") && WeaponReady())
-            {
-                weapon.Use();
-            }
+            weapon.Use();
+        }
+        
+        if(Input.GetButton("Fire2") && CanUseWeapon(secondWeapon))
+        {
+            secondWeapon.Use();
         }
     }
 
@@ -130,9 +135,14 @@ public class Player : Spaceship
 
     // Weapon
 
-    private bool WeaponReady()
+    public void SetSecondWeapon(WeaponBase weapon)
     {
-        return !weapon.IsInCooldown();
+        // Destroy previous weapon
+        if (secondWeapon)
+            GameObject.Destroy(secondWeapon.gameObject);
+
+        secondWeapon = weapon;
+        secondWeapon.owner = this;
     }
 
     // Stun
