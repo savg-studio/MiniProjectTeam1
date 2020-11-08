@@ -40,10 +40,13 @@ public class Explosion : MonoBehaviour
 
         foreach(var collider in colliders)
         {
-            var rigidbody = collider.attachedRigidbody;
-            if(rigidbody)
+            if (!collider.isTrigger)
             {
-                AddExplosionForce(rigidbody);
+                var rigidbody = collider.attachedRigidbody;
+                if (rigidbody)
+                {
+                    AddExplosionForce(rigidbody);
+                }
             }
         }
     }

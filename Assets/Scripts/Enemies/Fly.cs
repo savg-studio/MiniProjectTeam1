@@ -76,6 +76,7 @@ public class Fly : AISpaceship
         {
             potentialPlayer.Stun();
             potentialPlayer.TakeDamage();
+
             this.Die();
         }
     }

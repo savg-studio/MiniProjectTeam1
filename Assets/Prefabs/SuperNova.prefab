@@ -203,7 +203,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8378679854254267164}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -224,10 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a52880f58eb77a4cab711dc0fb6538f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionForce: 10
+  explosionForce: 5
   mode: 1
-  explosionDelay: 3
-  targetColor: {r: 1, g: 1, b: 1, a: 0}
   mask:
     serializedVersion: 2
     m_Bits: 20736
+  explosionDelay: 1.5
+  targetColor: {r: 1, g: 1, b: 1, a: 0}
