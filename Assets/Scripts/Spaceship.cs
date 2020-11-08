@@ -98,7 +98,7 @@ public class Spaceship : MonoBehaviour
 
     public virtual void TakeDamage()
     {
-        if (!HasFlag(SpaceshipStateFlags.DEAD))
+        if (!HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.INVULNERABLE))
         {
             if (!shield || !shield.IsActive())
             {
@@ -107,11 +107,8 @@ public class Spaceship : MonoBehaviour
                 else
                     currentArmor--;
             }
-            else
-            {
-                shield.Disable();
-            }
 
+            shield.Disable();
             Stun();
             OnDamageTaken();
         }
@@ -154,7 +151,7 @@ public class Spaceship : MonoBehaviour
     {
         var layer = collision.gameObject.layer;
 
-        if (layer == LayerMask.NameToLayer("Projectile"))
+        if (layer == LayerMask.NameToLayer("Projectile") && layer == LayerMask.NameToLayer("Meteor"))
             TakeDamage();
         else if (layer == LayerMask.NameToLayer("Obstacles") && HasFlag(SpaceshipStateFlags.STUNNED))
             TakeDamage();

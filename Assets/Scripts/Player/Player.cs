@@ -16,7 +16,6 @@ public class Player : Spaceship
 
     // Invulnerability
     public float invulnerabilityDuration;
-    private bool invulnerable = false;
 
     // Components
     private Rigidbody2D rigidBody2D;
@@ -154,7 +153,7 @@ public class Player : Spaceship
     // Invulnerability
     private void StartInvulnerability()
     {
-        invulnerable = true;
+        SetFlag(SpaceshipStateFlags.INVULNERABLE);
         blinkAnimation.Play();
 
         Invoke("StopInvulnerability", invulnerabilityDuration);
@@ -162,7 +161,7 @@ public class Player : Spaceship
    
     private void StopInvulnerability()
     {
-        invulnerable = false;
+        RemoveFlag(SpaceshipStateFlags.INVULNERABLE);
         blinkAnimation.Stop();
         spriteRenderer.enabled = true;
     }
