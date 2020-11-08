@@ -69,7 +69,7 @@ public class SteeringAgent : MonoBehaviour
 
     public void Seek(Vector2 targetPos)
     {
-        currentSteering += targetPos;
+        currentSteering += GetSeekForce(targetPos);
     }
 
     protected Vector2 GetSeekForce(Vector2 targetPos)
@@ -115,7 +115,12 @@ public class SteeringAgent : MonoBehaviour
         return GetSeekForce(wanderForce);
     }
 
-    protected Vector2 CollisionAvoidance()
+    public void CollisonAvoidance()
+    {
+        currentSteering += GetAvoidanceForce();
+    }
+
+    protected Vector2 GetAvoidanceForce()
     {
         Vector2 avoidance = Vector2.zero;
 

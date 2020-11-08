@@ -11,12 +11,15 @@ public enum FlyState
 public class Fly : AISpaceship
 {
     private FlyState state;
-    private Explosion explosion;
+
+    // Cache
+    private PolygonCollider2D collider;
 
     protected override void OnAIStart()
     {
         state = FlyState.WANDER;
-        explosion = GetComponentInChildren<Explosion>();
+
+        collider = GetComponent<PolygonCollider2D>();
     }
 
     protected override void OnAIFixedUpdate()
@@ -25,10 +28,12 @@ public class Fly : AISpaceship
         {
             case FlyState.WANDER:
                 agent.Wander();
+                agent.CollisonAvoidance();
                 break;
             case FlyState.CHASING_PLAYER:
-                agent.Pursuit(GetPlayerPos(), player.GetVelocity());
-                //agent.Seek(GetPlayerPos());
+                //agent.Pursuit(GetPlayerPos(), player.GetVelocity());
+                agent.Seek(GetPlayerPos());
+                agent.CollisonAvoidance();
                 break;
         }
     }
@@ -36,18 +41,19 @@ public class Fly : AISpaceship
     protected override void OnPlayerFound(Player player)
     {
         state = FlyState.CHASING_PLAYER;
-        agent.maxSpeed = 0.06f;
+        agent.maxSpeed = 0.05f;
     }
 
     protected override void OnDeathAnimationEnd()
     {
         base.OnDeathAnimationEnd();
-        Explode();
     }
 
-    protected void Explode()
+    protected override void OnDeath()
     {
-        explosion.Explode();
+        base.OnDeath();
+
+        collider.enabled = false;
     }
 
     protected Vector2 GetPlayerPos()
@@ -66,10 +72,11 @@ public class Fly : AISpaceship
 
         var potentialPlayer = collision.gameObject.GetComponent<Player>();
 
-        if (potentialPlayer)
+        if (potentialPlayer && !HasFlag(SpaceshipStateFlags.DEAD))
         {
             potentialPlayer.Stun();
-            Die();
+            potentialPlayer.TakeDamage();
+            this.Die();
         }
     }
 

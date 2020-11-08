@@ -7,7 +7,8 @@ public enum SpaceshipStateFlags
 {
     NONE = 0,
     STUNNED = 1,
-    DEAD = 2
+    DEAD = 2,
+    INVULNERABLE = 4
 }
 
 public class Spaceship : MonoBehaviour
@@ -22,12 +23,17 @@ public class Spaceship : MonoBehaviour
     public uint maxArmor;
     protected uint currentArmor;
 
+    // Cache
+    private Shield shield;
 
     // Unity methods and custom hooks
-    private void Start()
+    protected void Start()
     {
         // Hp
         currentArmor = maxArmor;
+
+        // Chace
+        shield = GetComponentInChildren<Shield>();
 
         OnStart();
     }
@@ -75,6 +81,8 @@ public class Spaceship : MonoBehaviour
         stateFlags = stateFlags & ~flag;
     }
 
+    // State - Stun
+
     public virtual void Stun()
     {
         SetFlag(SpaceshipStateFlags.STUNNED);
@@ -86,16 +94,23 @@ public class Spaceship : MonoBehaviour
         RemoveFlag(SpaceshipStateFlags.STUNNED);
     }
 
-    // HP
+    // State - HP
 
     public virtual void TakeDamage()
     {
         if (!HasFlag(SpaceshipStateFlags.DEAD))
         {
-            if (currentArmor == 0)
-                Die();
+            if (!shield || !shield.IsActive())
+            {
+                if (currentArmor == 0)
+                    Die();
+                else
+                    currentArmor--;
+            }
             else
-                currentArmor--;
+            {
+                shield.Disable();
+            }
 
             OnDamageTaken();
         }
@@ -105,6 +120,8 @@ public class Spaceship : MonoBehaviour
     {
 
     }
+
+    // State - Death
 
     protected void Die()
     {

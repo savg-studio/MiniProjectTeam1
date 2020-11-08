@@ -14,30 +14,9 @@ public class Player : Spaceship
     public float rotationSpeed;
     private float speed;
 
-    // Dash
-    public float dashForce;
-    public float dashDuration;
-    public float dashCooldown;
-
-    private bool dashing = false;
-    private bool dashInCooldown = false;
-
-    // Laser Recoil
-    private bool inRecoil = false;
-    public bool laserRecoilEnabled;
-    public float laserRecoilForce;
-    public float laserRecoilDuration;
-
-    // Stun effects
-
     // Invulnerability
     public float invulnerabilityDuration;
     private bool invulnerable = false;
-
-    // Shields
-    public float shieldCooldown;
-    private GameObject shieldGO;
-    private float shieldTimeLeft;
 
     // Components
     private Rigidbody2D rigidBody2D;
@@ -48,11 +27,10 @@ public class Player : Spaceship
     private GameObject sprite;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void OnStart()
     {
         // GameObjects
         sprite = transform.Find("Sprite").gameObject;
-        shieldGO = transform.Find("Shield").gameObject;
 
         // Components
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -68,21 +46,16 @@ public class Player : Spaceship
     }
 
     // Update is called once per frame
-    void Update() 
+    protected override void OnUpdate() 
     {
-        // Dash
-        if (Input.GetKeyDown(KeyCode.Space) && CanStartDash())
-            Dash();
         // Movement speed
+        if (Input.GetAxis("Vertical") == 1)
+            speed = maxSpeed;
+        else if (Input.GetAxis("Vertical") == -1) 
+            speed = minSpeed;
         else
-        {
-            if (Input.GetAxis("Vertical") == 1)
-                speed = maxSpeed;
-            else if (Input.GetAxis("Vertical") == -1) 
-                speed = minSpeed;
-            else
-                speed = baseSpeed;
-        }
+            speed = baseSpeed;
+     
 
         if(!HasFlag(SpaceshipStateFlags.STUNNED))
         {
@@ -92,14 +65,6 @@ public class Player : Spaceship
                 weapon.Use();
             }
         }
-
-        // Shield
-        if(!IsShieldUp())
-        {
-            UpdateShieldTimer();
-            if (IsShieldReady())
-                EnableShield();
-        }
     }
 
     void FixedUpdate()
@@ -107,7 +72,7 @@ public class Player : Spaceship
         if (!HasFlag(SpaceshipStateFlags.STUNNED))
             ResetAngularVelocity();
 
-        if (!dashing && !HasFlag(SpaceshipStateFlags.STUNNED) && !inRecoil)
+        if (!HasFlag(SpaceshipStateFlags.STUNNED))
         {
             Vector3 newRotation = GetInputRotation();
             Rotate(newRotation);
@@ -167,53 +132,7 @@ public class Player : Spaceship
         return dir;
     }
 
-    // Dash
-    private void Dash()
-    {
-        Vector2 force = GetCurrentDirection() * dashForce * speed;
-        dashing = true;
-        dashInCooldown = true;
-        Invoke("StopDashing", dashDuration);
-        Invoke("EnableDash", dashCooldown);
-        rigidBody2D.AddForce(force, ForceMode2D.Impulse);
-    }
-
-    private bool CanStartDash()
-    {
-        return !dashing && !dashInCooldown && !inRecoil;
-    }
-
-    private void StopDashing()
-    {
-        dashing = false;
-        rigidBody2D.velocity = Vector2.zero;
-        rigidBody2D.angularVelocity = 0;
-    }
-
-    private void EnableDash()
-    {
-        dashInCooldown = false;
-    }
-
     // Weapon
-
-    private void Recoil()
-    {
-        inRecoil = true;
-        rigidBody2D.velocity = Vector2.zero;
-        rigidBody2D.AddForce(GetRecoilDir() * laserRecoilForce);
-    }
-
-    private void RecoverFromRecoil()
-    {
-        inRecoil = false;
-    }
-
-    private Vector2 GetRecoilDir()
-    {
-        var recoilDir = -1 * GetCurrentDirection();
-        return recoilDir;
-    }
 
     private bool WeaponReady()
     {
@@ -248,39 +167,11 @@ public class Player : Spaceship
         spriteRenderer.enabled = true;
     }
 
-    // HP
-    public override void TakeDamage()
+    protected override void OnDamageTaken()
     {
         display.SetCurrentArmor(currentArmor);
-    }
 
-    private bool IsShieldUp()
-    {
-        return shieldGO.activeSelf;
-    }
-
-    private void DisableShield()
-    {
-        shieldGO.SetActive(false);
-    }
-
-    private void EnableShield()
-    {
-        shieldGO.SetActive(true);
-    }
-
-    private void ResetShieldTimer()
-    {
-        shieldTimeLeft = shieldCooldown;
-    }
-    private bool IsShieldReady()
-    {
-        return shieldTimeLeft < 0;
-    }
-
-    private void UpdateShieldTimer()
-    {
-        shieldTimeLeft -= Time.deltaTime;
+        StartInvulnerability();
     }
 
     protected override void OnDeath()
@@ -291,20 +182,5 @@ public class Player : Spaceship
     // Collision
     public void CollideWith(Projectile p, Collision2D collision)
     {
-        if (IsShieldUp())
-        {
-            DisableShield();
-            StartInvulnerability();
-
-            ResetShieldTimer();
-        }
-        else if (!invulnerable)
-        {
-            Stun();
-            TakeDamage();
-            StartInvulnerability();
-
-            ResetShieldTimer();
-        }
     }
 }

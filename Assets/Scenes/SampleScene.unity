@@ -312,6 +312,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8378679854254267164, guid: a5697eb449df8ac4c8bbfd9425d383b7,
         type: 3}
+    - target: {fileID: 5503407300639066297, guid: 2f6f94633887c5445b7c77f0cc905a8c,
+        type: 3}
+      propertyPath: superNovaGO
+      value: 
+      objectReference: {fileID: 8378679854254267164, guid: a5697eb449df8ac4c8bbfd9425d383b7,
+        type: 3}
+    - target: {fileID: 5503407300639066297, guid: 2f6f94633887c5445b7c77f0cc905a8c,
+        type: 3}
+      propertyPath: deathSpinningForce
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f6f94633887c5445b7c77f0cc905a8c, type: 3}
 --- !u!1 &126150002
@@ -607,7 +618,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375486257}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3917aebd196cc384da6716cf3ebf9c7e, type: 3}
   m_Name: 
@@ -628,7 +639,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375486257}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3917aebd196cc384da6716cf3ebf9c7e, type: 3}
   m_Name: 
@@ -1681,7 +1692,7 @@ PrefabInstance:
     - target: {fileID: 6190269493852735535, guid: faeca76667226d04e941584b59ac8fab,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faeca76667226d04e941584b59ac8fab, type: 3}
@@ -1815,7 +1826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1731438075
 Transform:
   m_ObjectHideFlags: 0
@@ -2125,10 +2136,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 5872018256464445608, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872018256464445608, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6927401033613424361, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927401033613424361, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldInner
       objectReference: {fileID: 0}
     - target: {fileID: 6927401033689824491, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
         type: 3}
