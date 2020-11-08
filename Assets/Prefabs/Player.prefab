@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3108245141243304976}
-  m_Layer: 0
+  - component: {fileID: 1311061361}
+  m_Layer: 12
   m_Name: SuperNovaWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +31,22 @@ Transform:
   m_Father: {fileID: 6927401035724097118}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1311061361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360610517706622384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24b8b2d418a11b40bf4444557f432e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownDuration: 1
+  owner: {fileID: 0}
+  superNovaGo: {fileID: 8378679854254267164, guid: a5697eb449df8ac4c8bbfd9425d383b7,
+    type: 3}
 --- !u!1 &1758602060284703368
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4933800593852421653}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6927401033689824490}
   - component: {fileID: 1567796102}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ForceWaveWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +137,8 @@ GameObject:
   - component: {fileID: 6927401033837697421}
   - component: {fileID: 6927401033837697418}
   - component: {fileID: 6927401033837697419}
-  m_Layer: 8
+  - component: {fileID: 8833942418774677520}
+  m_Layer: 12
   m_Name: LaserAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,8 +195,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -386854271
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4f43228b66dd3534788a12a1b869b747, type: 3}
   m_Color: {r: 0.9716981, g: 0.9236961, b: 0, a: 1}
@@ -217,6 +235,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8833942418774677520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927401033837697422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5bb07d98e9151449290b51f183d7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6927401035724097117}
 --- !u!1 &6927401034751017273
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6927401034751017272}
   - component: {fileID: 6927401034751017271}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: LaserWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +306,7 @@ GameObject:
   - component: {fileID: 6927401035367694537}
   - component: {fileID: 6927401035367694536}
   - component: {fileID: 6927401035367694535}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +409,7 @@ GameObject:
   - component: {fileID: 6927401035724097088}
   - component: {fileID: 6927401035724097113}
   - component: {fileID: 6927401035724097114}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3824697a1b2102a448a586cbccec3b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1567796102}
+  weapon: {fileID: 6927401034751017271}
   stunDuration: 0.75
   maxArmor: 3
   display: {fileID: 0}
@@ -424,12 +455,6 @@ MonoBehaviour:
   minSpeed: 2
   baseSpeed: 3
   rotationSpeed: 250
-  dashForce: 0.5
-  dashDuration: 0.2
-  dashCooldown: 2
-  laserRecoilEnabled: 0
-  laserRecoilForce: 0
-  laserRecoilDuration: 0.5
   invulnerabilityDuration: 2
 --- !u!50 &6927401035724097116
 Rigidbody2D:
@@ -443,7 +468,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -653,6 +678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299203343671642971, guid: 42f2261ee3fe5de48ba988a173b03971,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f2261ee3fe5de48ba988a173b03971, type: 3}
