@@ -1680,30 +1680,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3036161783363127663, guid: 0ce7955029e044f41969d5cd60f7d8c3,
-        type: 3}
-      propertyPath: laserDuration
-      value: 0.075
-      objectReference: {fileID: 0}
     - target: {fileID: 3036161783521544264, guid: 0ce7955029e044f41969d5cd60f7d8c3,
         type: 3}
       propertyPath: m_Name
       value: Interceptor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3036161783521544626, guid: 0ce7955029e044f41969d5cd60f7d8c3,
-        type: 3}
-      propertyPath: offsetDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3036161783521544626, guid: 0ce7955029e044f41969d5cd60f7d8c3,
-        type: 3}
-      propertyPath: minDistanceToMove
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3036161783521544626, guid: 0ce7955029e044f41969d5cd60f7d8c3,
-        type: 3}
-      propertyPath: frames
-      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3036161783521544628, guid: 0ce7955029e044f41969d5cd60f7d8c3,
         type: 3}
