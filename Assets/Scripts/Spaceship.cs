@@ -108,7 +108,9 @@ public class Spaceship : MonoBehaviour
                     currentArmor--;
             }
 
-            shield.Disable();
+            if(shield)
+                shield.Disable();
+
             Stun();
             OnDamageTaken();
         }
@@ -143,7 +145,8 @@ public class Spaceship : MonoBehaviour
     public void SetWeapon(WeaponBase weapon)
     {
         this.weapon = weapon;
-        weapon.owner = this;
+        if(weapon)
+            weapon.owner = this;
     }
 
     public bool CanUseWeapon()

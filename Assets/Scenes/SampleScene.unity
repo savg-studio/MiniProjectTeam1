@@ -250,7 +250,7 @@ PrefabInstance:
     - target: {fileID: 3177536937977997232, guid: 2f6f94633887c5445b7c77f0cc905a8c,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3177536937977997238, guid: 2f6f94633887c5445b7c77f0cc905a8c,
         type: 3}
@@ -1684,6 +1684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Interceptor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036161783521544264, guid: 0ce7955029e044f41969d5cd60f7d8c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3036161783521544628, guid: 0ce7955029e044f41969d5cd60f7d8c3,
         type: 3}
