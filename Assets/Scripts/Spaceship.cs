@@ -151,7 +151,7 @@ public class Spaceship : MonoBehaviour
     {
         var layer = collision.gameObject.layer;
 
-        if (layer == LayerMask.NameToLayer("Projectile") && layer == LayerMask.NameToLayer("Meteor"))
+        if (layer == LayerMask.NameToLayer("Projectile") || layer == LayerMask.NameToLayer("Meteor"))
             TakeDamage();
         else if (layer == LayerMask.NameToLayer("Obstacles") && HasFlag(SpaceshipStateFlags.STUNNED))
             TakeDamage();
