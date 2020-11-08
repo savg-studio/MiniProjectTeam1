@@ -27,7 +27,7 @@ public class Fly : AISpaceship
         var spaceship = collision.gameObject.GetComponent<Spaceship>();
 
         if (spaceship && (!HasFlag(SpaceshipStateFlags.DEAD) && HasFlag(SpaceshipStateFlags.STUNNED)
-                      || spaceship is Player))
+                      || spaceship is Player && !spaceship.HasFlag(SpaceshipStateFlags.INVULNERABLE)) )
         {
             spaceship.TakeDamage();
 

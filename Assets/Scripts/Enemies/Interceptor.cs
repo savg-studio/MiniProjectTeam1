@@ -5,6 +5,7 @@ using UnityEngine;
 public class Interceptor : AISpaceship
 {
     public int frames;
+    public bool scaleByDist;
 
     protected override void OnAIStart()
     {
@@ -13,7 +14,7 @@ public class Interceptor : AISpaceship
     protected override void UpdateOnCombat()
     {
         var distanceToPlayer = GetVectorToPlayer().magnitude;
-        var effectiveFrames = frames / distanceToPlayer;
+        var effectiveFrames = scaleByDist ? Mathf.RoundToInt(frames / distanceToPlayer) : frames;
         var point = GetPlayerPos() - player.GetVelocity() * effectiveFrames;
         Vector2 pos = transform.position;
         //rigidbody2D.SetRotation(T1Utils.Vector2ToAngle(point - pos));

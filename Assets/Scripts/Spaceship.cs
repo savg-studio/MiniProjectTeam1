@@ -13,8 +13,10 @@ public enum SpaceshipStateFlags
 
 public class Spaceship : MonoBehaviour
 {
+    // Public Params
     public WeaponBase weapon;
-    public float stunDuration = 0.75f;
+    public float stunDuration;
+    public float invulnerabilityDuration;
 
     // State
     protected SpaceshipStateFlags stateFlags;
@@ -25,6 +27,8 @@ public class Spaceship : MonoBehaviour
 
     // Cache
     private Shield shield;
+    private SpriteRenderer spriteRenderer;
+    private Animation blinkAnimation;
 
     // Unity methods and custom hooks
     protected void Start()
@@ -34,6 +38,10 @@ public class Spaceship : MonoBehaviour
 
         // Cache
         shield = GetComponentInChildren<Shield>();
+        var son = transform.Find("Sprite");
+        blinkAnimation = son.GetComponent<Animation>();
+        spriteRenderer = son.GetComponent<SpriteRenderer>();
+
         SetWeapon(weapon);
 
         OnStart();
@@ -112,6 +120,7 @@ public class Spaceship : MonoBehaviour
                 shield.Disable();
 
             Stun();
+            StartInvulnerability();
             OnDamageTaken();
         }
     }
@@ -119,6 +128,22 @@ public class Spaceship : MonoBehaviour
     protected virtual void OnDamageTaken()
     {
 
+    }
+
+    // Invulnerability
+    protected void StartInvulnerability()
+    {
+        SetFlag(SpaceshipStateFlags.INVULNERABLE);
+        blinkAnimation.Play();
+
+        Invoke("StopInvulnerability", invulnerabilityDuration);
+    }
+
+    private void StopInvulnerability()
+    {
+        RemoveFlag(SpaceshipStateFlags.INVULNERABLE);
+        blinkAnimation.Stop();
+        spriteRenderer.enabled = true;
     }
 
     // State - Death
@@ -158,6 +183,8 @@ public class Spaceship : MonoBehaviour
     {
         return weapon && !weapon.IsInCooldown() && !HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.STUNNED);
     }
+
+
 
 
     public void OnCollisionEnter2D(Collision2D collision)

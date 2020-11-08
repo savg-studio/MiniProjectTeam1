@@ -211,6 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
   stunDuration: 0.75
+  invulnerabilityDuration: 0
   maxArmor: 0
   combatSpeed: 0.05
 --- !u!114 &2556002432949512384
@@ -260,6 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3177536939905592586}
   - component: {fileID: 3177536939905592584}
+  - component: {fileID: 592148836515857323}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -331,3 +333,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &592148836515857323
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177536939905592587}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 14cf3122a59a4d043b279fbb223e6bca, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 14cf3122a59a4d043b279fbb223e6bca, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

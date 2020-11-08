@@ -17,13 +17,8 @@ public class Player : Spaceship
     // Second weapon
     private WeaponBase secondWeapon;
 
-    // Invulnerability
-    public float invulnerabilityDuration;
-
     // Components
     private Rigidbody2D rigidBody2D;
-    private Animation blinkAnimation;
-    private SpriteRenderer spriteRenderer;
 
     // GameObjects
     private GameObject sprite;
@@ -36,8 +31,6 @@ public class Player : Spaceship
 
         // Components
         rigidBody2D = GetComponent<Rigidbody2D>();
-        blinkAnimation = GetComponentInChildren<Animation>();
-        spriteRenderer = sprite.GetComponent<SpriteRenderer>();
 
         // UI
         display.SetMaxArmor(maxArmor);
@@ -157,27 +150,9 @@ public class Player : Spaceship
         RemoveFlag(SpaceshipStateFlags.STUNNED);
     }
 
-    // Invulnerability
-    private void StartInvulnerability()
-    {
-        SetFlag(SpaceshipStateFlags.INVULNERABLE);
-        blinkAnimation.Play();
-
-        Invoke("StopInvulnerability", invulnerabilityDuration);
-    }
-   
-    private void StopInvulnerability()
-    {
-        RemoveFlag(SpaceshipStateFlags.INVULNERABLE);
-        blinkAnimation.Stop();
-        spriteRenderer.enabled = true;
-    }
-
     protected override void OnDamageTaken()
     {
         display.SetCurrentArmor(currentArmor);
-
-        StartInvulnerability();
     }
 
     protected override void OnDeath()
