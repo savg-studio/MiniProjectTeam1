@@ -26,7 +26,8 @@ public class Shockwave : Explosion
         if (spaceship && spaceship.gameObject.layer != LayerMask.NameToLayer("Player"))
             spaceship.Stun();
 
-        AddExplosionForce(rigidBody);
+        if(collision.gameObject.layer != LayerMask.NameToLayer("Player"))
+            AddExplosionForce(rigidBody);
     }
 
     private void OnBecameInvisible()

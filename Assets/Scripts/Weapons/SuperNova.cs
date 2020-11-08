@@ -80,6 +80,8 @@ public class SuperNova : Explosion
     {
         var spaceship = go.GetComponent<Spaceship>();
         if (spaceship)
-            spaceship.Stun();
+        {
+            spaceship.TakeDamage();
+        }
     }
 }

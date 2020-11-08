@@ -24,11 +24,12 @@ public class Fly : AISpaceship
     {
         base.OnCollision(collision);
 
-        var potentialPlayer = collision.gameObject.GetComponent<Player>();
+        var spaceship = collision.gameObject.GetComponent<Spaceship>();
 
-        if (potentialPlayer && !HasFlag(SpaceshipStateFlags.DEAD))
+        if (spaceship && (!HasFlag(SpaceshipStateFlags.DEAD) && HasFlag(SpaceshipStateFlags.STUNNED)
+                      || spaceship is Player))
         {
-            potentialPlayer.TakeDamage();
+            spaceship.TakeDamage();
 
             this.Die();
         }
