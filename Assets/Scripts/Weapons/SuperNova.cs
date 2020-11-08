@@ -8,7 +8,6 @@ public class SuperNova : Explosion
     public float explosionDelay;
     private float explosionTimeLeft;
     public Color targetColor;
-    public LayerMask mask;
 
     // Cache
     private GameObject circleSprite;
@@ -42,7 +41,7 @@ public class SuperNova : Explosion
 
         if (IsTimeOver())
         {
-            Explode(mask);
+            Explode();
             OnExplode();
         }
     }

@@ -62,11 +62,6 @@ public class SteeringAgent : MonoBehaviour
         ResetSteering();
     }
 
-    protected virtual Vector2 CalculateSteering()
-    {
-        return Vector2.zero;
-    }
-
     protected void ResetSteering()
     {
         currentSteering = Vector2.zero;

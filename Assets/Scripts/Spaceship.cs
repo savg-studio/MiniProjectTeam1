@@ -140,5 +140,12 @@ public class Spaceship : MonoBehaviour
             TakeDamage();
         else if (layer == LayerMask.NameToLayer("Obstacles") && HasFlag(SpaceshipStateFlags.STUNNED))
             TakeDamage();
+
+        OnCollision(collision);
+    }
+
+    protected virtual void OnCollision(Collision2D collision)
+    {
+
     }
 }

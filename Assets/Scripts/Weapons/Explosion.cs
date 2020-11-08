@@ -7,6 +7,7 @@ public class Explosion : MonoBehaviour
     // Params
     public float explosionForce;
     public ForceMode2D mode;
+    public LayerMask mask;
 
     // Cache vars
     protected Vector2 center;
@@ -33,7 +34,7 @@ public class Explosion : MonoBehaviour
 
     }
 
-    protected void Explode(LayerMask mask)
+    public void Explode()
     {
         var colliders = Physics2D.OverlapCircleAll(center, radius, mask);
 
