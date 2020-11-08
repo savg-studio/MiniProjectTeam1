@@ -41,5 +41,6 @@ public static class T1Utils
         var force = forceDir * finalForce;
 
         rigidbody.AddForce(force, mode);
+        rigidbody.AddTorque(finalForce);
     }
 }
