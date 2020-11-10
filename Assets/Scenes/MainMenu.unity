@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 302109970}
   - component: {fileID: 302109969}
   m_Layer: 5
-  m_Name: Text
+  m_Name: FooterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,11 +386,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: {fileID: 1625615782}
+  footer: {fileID: 302109969}
   menu: {fileID: 199092783}
-  footer: {fileID: 931536449}
   waitFadeDuration: 1.5
   headerFadeDuration: 3
-  menuFadeDuration: 3
+  menuFadeDuration: 1.5
 --- !u!4 &618748494
 Transform:
   m_ObjectHideFlags: 0
