@@ -77,7 +77,7 @@ public class MainMenuManager : MonoBehaviour
 
             case IntroState.HEADER_FADE_IN:
 
-                if (FadeInHeaderAndFooter())
+                if (FadeInHeader())
                 {
                     state = IntroState.MENU_FADE_IN;
                     timePassed = 0;
@@ -87,7 +87,8 @@ public class MainMenuManager : MonoBehaviour
 
             case IntroState.MENU_FADE_IN:
 
-                if (FadeInButtons())
+                
+                if (FadeInButtonsAndFooter())
                 {
                     state = IntroState.DONE;
                     SetButtonsEnabled(true);
@@ -102,13 +103,13 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    private bool FadeInHeaderAndFooter()
+    private bool FadeInHeader()
     {
         float ratio = Mathf.Min(timePassed / headerFadeDuration, 1f);
         float currentAlpha = baseHeaderColor.a * ratio;
 
         SetTextAlpha(header, currentAlpha);
-        SetTextAlpha(footer, currentAlpha);
+        
 
         return ratio >= 1f;
     }
@@ -120,12 +121,13 @@ public class MainMenuManager : MonoBehaviour
         text.color = currentColor;
     }
 
-    private bool FadeInButtons()
+    private bool FadeInButtonsAndFooter()
     {
         float ratio = Mathf.Min(timePassed / menuFadeDuration, 1f);
         float currentAlpha = baseButtonColor.a * ratio;
 
         SetButtonsAlpha(currentAlpha);
+        SetTextAlpha(footer, currentAlpha);
 
         return ratio >= 1f;
     }
