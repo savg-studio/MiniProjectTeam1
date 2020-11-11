@@ -116,7 +116,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void SetTextAlpha(Text text, float alpha)
     {
-        Color currentColor = header.color;
+        Color currentColor = text.color;
         currentColor.a = alpha;
         text.color = currentColor;
     }

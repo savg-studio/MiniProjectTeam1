@@ -6,6 +6,7 @@ public class Player : Spaceship
 {
     // UI
     public ArmorDisplay display;
+    public GameObject missionFailedBanner;
 
     // Speed
     public float maxSpeed;
@@ -19,6 +20,7 @@ public class Player : Spaceship
 
     // Components
     private Rigidbody2D rigidBody2D;
+    private Animation deathAnimation;
 
     // GameObjects
     private GameObject sprite;
@@ -31,6 +33,7 @@ public class Player : Spaceship
 
         // Components
         rigidBody2D = GetComponent<Rigidbody2D>();
+        deathAnimation = GetComponent<Animation>();
 
         // UI
         display.SetMaxArmor(maxArmor);
@@ -157,6 +160,7 @@ public class Player : Spaceship
 
     protected override void OnDeath()
     {
-
+        missionFailedBanner.SetActive(true);
+        deathAnimation.Play();
     }
 }
