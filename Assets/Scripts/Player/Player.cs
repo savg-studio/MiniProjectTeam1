@@ -50,12 +50,12 @@ public class Player : Spaceship
      
 
         // Attack
-        if(Input.GetButton("Fire1") && CanUseWeapon(weapon))
+        if(Input.GetButtonDown("Fire1") && CanUseWeapon(weapon))
         {
             weapon.Use();
         }
         
-        if(Input.GetButton("Fire2") && CanUseWeapon(secondWeapon))
+        if(Input.GetButtonDown("Fire2") && CanUseWeapon(secondWeapon))
         {
             secondWeapon.Use();
         }

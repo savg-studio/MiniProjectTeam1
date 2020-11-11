@@ -479,7 +479,7 @@ MonoBehaviour:
   menu: {fileID: 199092783}
   waitFadeDuration: 1.5
   headerFadeDuration: 3
-  menuFadeDuration: 1.5
+  menuFadeDuration: 0.75
 --- !u!4 &618748494
 Transform:
   m_ObjectHideFlags: 0
