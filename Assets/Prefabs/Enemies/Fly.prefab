@@ -235,7 +235,7 @@ MonoBehaviour:
   avoidanceForce: 0.05
   mask:
     serializedVersion: 2
-    m_Bits: 82688
+    m_Bits: 82432
   isStopped: 0
   isRotationStopped: 0
 --- !u!111 &182243297
