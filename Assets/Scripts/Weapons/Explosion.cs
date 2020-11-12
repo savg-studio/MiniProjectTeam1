@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
@@ -36,6 +37,7 @@ public class Explosion : MonoBehaviour
 
     public void Explode()
     {
+        List<GameObject> explodedObjects = new List<GameObject>();
         var colliders = Physics2D.OverlapCircleAll(center, radius, mask);
 
         foreach(var collider in colliders)
@@ -43,9 +45,10 @@ public class Explosion : MonoBehaviour
             if (!collider.isTrigger)
             {
                 var rigidbody = collider.attachedRigidbody;
-                if (rigidbody)
+                if (rigidbody && !explodedObjects.Contains(rigidbody.gameObject))
                 {
                     AddExplosionForce(rigidbody);
+                    explodedObjects.Add(rigidbody.gameObject);
                 }
             }
         }
