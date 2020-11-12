@@ -75,6 +75,8 @@ public class SteeringAgent : MonoBehaviour
         }
     }
 
+    // Steering
+
     protected void ResetSteering()
     {
         currentSteering = Vector2.zero;
@@ -181,6 +183,11 @@ public class SteeringAgent : MonoBehaviour
     protected Vector2 GetPos()
     {
         return transform.position;
+    }
+
+    public Vector2 GetCurrentVelocity()
+    {
+        return currentVelocity;
     }
 
     // Rigidbody

@@ -6,20 +6,25 @@ public class LaserWeapon : WeaponBase
 {
     // Public params
     public float laserDuration;
+    public LayerMask layerMask;
     private float laserDurationLeft;
+    public float laserScaler;
 
     // Cache components
     private GameObject laserObject;
+    private GameObject laserRef;
 
     // Start is called before the first frame update
     void Start()
     {
         // Find component
         laserObject = transform.Find("LaserAttack").gameObject;
+        laserRef = transform.Find("LaserRef").gameObject;
     }
 
     protected override void OnUse()
     {
+        ResizeLaser();
         laserObject.SetActive(true);
 
         StartActiveFrames();
@@ -29,6 +34,8 @@ public class LaserWeapon : WeaponBase
     {
         if(IsActive())
         {
+            ResizeLaser();
+
             bool over = DecreaseDuration();
             if (over)
                 OnActiveFramesExpired();
@@ -55,5 +62,25 @@ public class LaserWeapon : WeaponBase
     private void OnActiveFramesExpired()
     {
         laserObject.SetActive(false);
+    }
+
+    private void ResizeLaser()
+    {
+        var rayOrigin = laserRef.transform.position;
+        var dir = owner.GetFacingDir();
+        var hit = Physics2D.Raycast(rayOrigin, dir, layerMask);
+        if (hit)
+        {
+            var baseScale = laserObject.transform.localScale;
+            var basePos = laserObject.transform.localPosition;
+            var parentScaler = (1 / owner.transform.localScale.x);
+            baseScale.x = hit.distance * parentScaler + laserRef.transform.localPosition.x;
+            // Adds custom offset to guarantee collisions
+            baseScale.x = baseScale.x * laserScaler;
+            basePos.x = baseScale.x / 2;
+
+            laserObject.transform.localScale = baseScale;
+            laserObject.transform.localPosition = basePos;
+        }
     }
 }

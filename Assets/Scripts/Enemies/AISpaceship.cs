@@ -134,4 +134,9 @@ public class AISpaceship : Spaceship
 
         return playerPos;
     }
+
+    public override Vector2 GetFacingDir()
+    {
+        return agent.GetCurrentVelocity().normalized;
+    }
 }
