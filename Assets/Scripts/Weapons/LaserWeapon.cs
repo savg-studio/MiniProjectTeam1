@@ -72,7 +72,6 @@ public class LaserWeapon : WeaponBase
         var hit = Physics2D.Raycast(rayOrigin, dir, laserMaxDistance, layerMask);
         if (hit)
         {
-            Debug.Log("Hit against object " + hit.collider.gameObject.name + " of layer " + LayerMask.LayerToName(hit.collider.gameObject.layer));
             var baseScale = laserObject.transform.localScale;
             var basePos = laserObject.transform.localPosition;
             var parentScaler = (1 / owner.transform.localScale.x);
