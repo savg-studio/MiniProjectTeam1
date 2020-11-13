@@ -42,7 +42,7 @@ public class SteeringAgent : MonoBehaviour
         rightWing = transform.Find("Right").gameObject;
 
         // Inner
-        currentVelocity = new Vector2(1, 0) * maxSpeed;
+        currentVelocity = Random.insideUnitCircle * maxSpeed;
         isStopped = false;
         isRotationStopped = false;
 
@@ -127,7 +127,7 @@ public class SteeringAgent : MonoBehaviour
             wanderForce = circleCenter + displacement;
         }
 
-        return GetSeekForce(wanderForce);
+        return wanderForce;
     }
 
     public void CollisonAvoidance()
