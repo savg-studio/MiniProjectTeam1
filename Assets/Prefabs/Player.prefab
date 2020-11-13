@@ -430,10 +430,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4787953743466855706, guid: 42f2261ee3fe5de48ba988a173b03971,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8299203343671642971, guid: 42f2261ee3fe5de48ba988a173b03971,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42f2261ee3fe5de48ba988a173b03971, type: 3}
@@ -528,7 +533,7 @@ PrefabInstance:
     - target: {fileID: 8465953389885881773, guid: 34558632357697146ae97254bebbe50c,
         type: 3}
       propertyPath: laserDuration
-      value: 100
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8465953389885881773, guid: 34558632357697146ae97254bebbe50c,
         type: 3}
@@ -539,6 +544,11 @@ PrefabInstance:
         type: 3}
       propertyPath: laserScaler
       value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465953389885881773, guid: 34558632357697146ae97254bebbe50c,
+        type: 3}
+      propertyPath: laserMaxDistance
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34558632357697146ae97254bebbe50c, type: 3}

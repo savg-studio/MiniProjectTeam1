@@ -6,6 +6,7 @@ public class LaserWeapon : WeaponBase
 {
     // Public params
     public float laserDuration;
+    public float laserMaxDistance;
     public LayerMask layerMask;
     private float laserDurationLeft;
     public float laserScaler;
@@ -68,9 +69,10 @@ public class LaserWeapon : WeaponBase
     {
         var rayOrigin = laserRef.transform.position;
         var dir = owner.GetFacingDir();
-        var hit = Physics2D.Raycast(rayOrigin, dir, layerMask);
+        var hit = Physics2D.Raycast(rayOrigin, dir, laserMaxDistance, layerMask);
         if (hit)
         {
+            Debug.Log("Hit against object " + hit.collider.gameObject.name + " of layer " + LayerMask.LayerToName(hit.collider.gameObject.layer));
             var baseScale = laserObject.transform.localScale;
             var basePos = laserObject.transform.localPosition;
             var parentScaler = (1 / owner.transform.localScale.x);
