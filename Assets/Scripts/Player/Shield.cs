@@ -19,6 +19,7 @@ public class Shield : MonoBehaviour
     {
         // Prepare timer
         timer = new Timer(shieldCooldown);
+        //timer.duration = shieldCooldown;
         timer.SetCallback(Enable);
 
         innerObject = transform.GetChild(0).gameObject;
@@ -49,6 +50,6 @@ public class Shield : MonoBehaviour
     {
         isActive = false;
         innerObject.SetActive(false);
-        timer.Start();
+        timer.Restart();
     }
 }
