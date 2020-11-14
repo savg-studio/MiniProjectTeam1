@@ -6,6 +6,7 @@ public class WorldGenerator : MonoBehaviour
 {
     // Public params
     public GameObject chunkPrefab;
+    public Chunk originChunk;
     public GameObject player;
     public Transform chunkContainer;
     public int chunkDistance;
@@ -15,7 +16,17 @@ public class WorldGenerator : MonoBehaviour
 
     private void Start()
     {
+        CreateOriginChunk();
         GenerateOrActivateChunksAround(Vector2.zero);
+    }
+
+    private void CreateOriginChunk()
+    {
+        chunks.Add(Vector2.zero, originChunk);
+        originChunk.Construct(Vector2.zero, this);
+
+        if (chunkContainer)
+            originChunk.transform.parent = chunkContainer;
     }
 
     private void GenerateOrActivateChunksAround(Vector2 basePos)

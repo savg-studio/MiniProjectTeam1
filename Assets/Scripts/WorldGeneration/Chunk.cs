@@ -46,8 +46,6 @@ public class Chunk : MonoBehaviour
 
         if(potentialPlayer && worldGenerator && !playerInside)
         {
-            //worldGenerator.OnPlayerEnterChunk(chunkIndex);
-
             playerInside = true;
             activateTimer.Restart();
         }
