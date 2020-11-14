@@ -527,7 +527,7 @@ MonoBehaviour:
     type: 3}
   player: {fileID: 172361412}
   chunkContainer: {fileID: 1884197092}
-  chunkDistance: 3
+  chunkDistance: 2
 --- !u!4 &223641106
 Transform:
   m_ObjectHideFlags: 0

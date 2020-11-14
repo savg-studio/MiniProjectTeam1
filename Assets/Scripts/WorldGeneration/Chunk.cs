@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     // Public params
+    public float minTimeInside;
     public float generationCooldown;
 
     // Inner
@@ -12,7 +13,14 @@ public class Chunk : MonoBehaviour
     private WorldGenerator worldGenerator;
     private SpriteRenderer spriteRenderer;
 
+    private bool playerInside = false;
     private bool generationEnabled = true;
+    private Timer activateTimer;
+
+    private void Update()
+    {
+        activateTimer.Update();
+    }
 
     public Vector2 GetSize()
     {
@@ -25,6 +33,10 @@ public class Chunk : MonoBehaviour
         this.worldGenerator = worldGenerator;
         gameObject.name = "Chunk" + chunkIndex;
 
+        activateTimer = new Timer(minTimeInside);
+        activateTimer.SetCallback(CallWorldGenerator);
+        activateTimer.Stop();
+
         this.spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -32,21 +44,39 @@ public class Chunk : MonoBehaviour
     {
         Player potentialPlayer = collision.gameObject.GetComponent<Player>();
 
-        if(potentialPlayer && worldGenerator && generationEnabled)
+        if(potentialPlayer && worldGenerator && !playerInside)
         {
-            CallWorldGenerator();
+            //worldGenerator.OnPlayerEnterChunk(chunkIndex);
+
+            playerInside = true;
+            activateTimer.Restart();
         }
     }
 
     private void CallWorldGenerator()
     {
-        worldGenerator.OnPlayerEnterChunk(chunkIndex);
-        generationEnabled = false;
-        Invoke("EnableGeneration", generationCooldown);
+        if (generationEnabled)
+        {
+            Debug.Log("Called world generation from " + chunkIndex);
+            worldGenerator.OnPlayerEnterChunk(chunkIndex);
+            generationEnabled = false;
+            Invoke("EnableWorldGeneration", generationCooldown);
+        }
     }
 
-    private void EnableGeneration()
+    private void EnableWorldGeneration()
     {
         generationEnabled = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Player potentialPlayer = collision.gameObject.GetComponent<Player>();
+
+        if(potentialPlayer)
+        {
+            playerInside = false;
+            activateTimer.Stop();
+        }
     }
 }
