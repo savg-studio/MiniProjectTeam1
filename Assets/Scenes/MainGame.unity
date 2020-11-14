@@ -541,7 +541,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &240980080
 GameObject:
@@ -904,77 +904,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334438084}
   m_CullTransparentMesh: 0
---- !u!1 &375486257
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 375486259}
-  - component: {fileID: 375486258}
-  - component: {fileID: 375486260}
-  m_Layer: 0
-  m_Name: MeteorZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &375486258
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375486257}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 17.75, y: 10}
-  m_EdgeRadius: 0
---- !u!4 &375486259
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375486257}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &375486260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375486257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3592c459f432d36459e334e25fd70cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMeteors: 4
 --- !u!1 &433838453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +985,7 @@ MonoBehaviour:
   maxTorque: 20
   minSize: 0.25
   maxSize: 0.5
-  spawnTarget: {fileID: 375486257}
+  spawnTarget: {fileID: 0}
   minForce: 20
   maxForce: 80
 --- !u!114 &433838457
@@ -1288,7 +1217,7 @@ MonoBehaviour:
   maxTorque: 20
   minSize: 0.25
   maxSize: 0.5
-  spawnTarget: {fileID: 375486257}
+  spawnTarget: {fileID: 0}
   minForce: 20
   maxForce: 80
 --- !u!114 &672657566
@@ -1723,7 +1652,7 @@ MonoBehaviour:
   maxTorque: 100
   minSize: 0.25
   maxSize: 0.5
-  spawnTarget: {fileID: 375486257}
+  spawnTarget: {fileID: 0}
   minForce: 20
   maxForce: 80
 --- !u!114 &968272131
@@ -2035,7 +1964,7 @@ Transform:
   - {fileID: 968272128}
   - {fileID: 1870522074}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1810039019
 GameObject:
@@ -2211,7 +2140,7 @@ MonoBehaviour:
   maxTorque: 100
   minSize: 0.25
   maxSize: 0.5
-  spawnTarget: {fileID: 375486257}
+  spawnTarget: {fileID: 0}
   minForce: 20
   maxForce: 80
 --- !u!114 &1870522077
@@ -2259,7 +2188,7 @@ Transform:
   m_Children:
   - {fileID: 3861542778479899086}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1909882465
 GameObject:
@@ -2432,8 +2361,8 @@ MonoBehaviour:
   minAmount: 1
   maxAmount: 2
   objectParent: {fileID: 2634494072805122300}
-  minTorque: 400
-  maxTorque: 800
+  minTorque: 1000
+  maxTorque: 2000
   minSize: 0.33
   maxSize: 0.33
 --- !u!1 &3861542778533271780
@@ -2830,7 +2759,7 @@ PrefabInstance:
     - target: {fileID: 6927401035724097118, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6927401035724097118, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
         type: 3}

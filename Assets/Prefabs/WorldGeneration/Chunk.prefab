@@ -267,8 +267,8 @@ MonoBehaviour:
   minAmount: 1
   maxAmount: 2
   objectParent: {fileID: 1001624020562854417}
-  minTorque: 3000
-  maxTorque: 3000
+  minTorque: 100
+  maxTorque: 100
   minSize: 1.5
   maxSize: 3
 --- !u!114 &2089412294369704462
@@ -289,8 +289,8 @@ MonoBehaviour:
   minAmount: 1
   maxAmount: 2
   objectParent: {fileID: 1001624020562854417}
-  minTorque: 400
-  maxTorque: 800
+  minTorque: 100
+  maxTorque: 100
   minSize: 0.33
   maxSize: 0.33
 --- !u!114 &2089412294369704463

@@ -14,7 +14,6 @@ public class Spawn : MonoBehaviour
     // Cache
     private BoxCollider2D boxCollider;
 
-
     public void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3545020987812032167}
   - component: {fileID: 194213319881912013}
   - component: {fileID: 7825663382591313693}
+  - component: {fileID: -6771813570022877364}
   m_Layer: 0
   m_Name: PowerUpShockwave
   m_TagString: Untagged
@@ -170,3 +171,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-6771813570022877364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5285345283455847622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bee205294623764a95e93549547218d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
