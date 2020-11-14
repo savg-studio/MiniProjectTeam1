@@ -91,10 +91,15 @@ public class Spaceship : MonoBehaviour
 
     // State - Stun
 
-    public virtual void Stun()
+    public void Stun()
+    {
+        Stun(stunDuration);
+    }
+
+    public void Stun(float duration)
     {
         SetFlag(SpaceshipStateFlags.STUNNED);
-        Invoke("RecoverStun", stunDuration);
+        Invoke("RecoverStun", duration);
     }
 
     public void RecoverStun()
@@ -148,7 +153,7 @@ public class Spaceship : MonoBehaviour
 
     // State - Death
 
-    protected void Die()
+    public void Die()
     {
         SetFlag(SpaceshipStateFlags.DEAD);
 

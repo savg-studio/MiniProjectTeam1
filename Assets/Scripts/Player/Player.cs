@@ -6,7 +6,7 @@ public class Player : Spaceship
 {
     // UI
     public ArmorDisplay display;
-    public GameObject missionFailedBanner;
+    public MissionResultBanner missionFailedBanner;
 
     // Speed
     public float maxSpeed;
@@ -22,15 +22,9 @@ public class Player : Spaceship
     private Rigidbody2D rigidBody2D;
     private Animation deathAnimation;
 
-    // GameObjects
-    private GameObject sprite;
-
     // Start is called before the first frame update
     protected override void OnStart()
     {
-        // GameObjects
-        sprite = transform.Find("Sprite").gameObject;
-
         // Components
         rigidBody2D = GetComponent<Rigidbody2D>();
         deathAnimation = GetComponent<Animation>();
@@ -142,16 +136,6 @@ public class Player : Spaceship
     }
 
     // Stun
-    public override void Stun()
-    {
-        SetFlag(SpaceshipStateFlags.STUNNED);
-        Invoke("Recover", stunDuration);
-    }
-
-    private void Recover()
-    {
-        RemoveFlag(SpaceshipStateFlags.STUNNED);
-    }
 
     protected override void OnDamageTaken()
     {
@@ -160,7 +144,7 @@ public class Player : Spaceship
 
     protected override void OnDeath()
     {
-        missionFailedBanner.SetActive(true);
+        missionFailedBanner.OnFail();
         deathAnimation.Play();
     }
 }

@@ -10,6 +10,8 @@ public class WorldGenerator : MonoBehaviour
     public GameObject player;
     public Transform chunkContainer;
     public int chunkDistance;
+    public GameObject blackHolePrefab;
+    public float blackHoleSpawnTime;
 
     // Inner
     private Dictionary<Vector2, Chunk> chunks = new Dictionary<Vector2, Chunk>();
@@ -18,6 +20,7 @@ public class WorldGenerator : MonoBehaviour
     {
         CreateOriginChunk();
         GenerateOrActivateChunksAround(Vector2.zero);
+        Invoke("SpawnBlackHole", blackHoleSpawnTime);
     }
 
     private void CreateOriginChunk()
@@ -86,4 +89,11 @@ public class WorldGenerator : MonoBehaviour
             chunk.gameObject.SetActive(false);
         }
     }
+
+
+    private void SpawnBlackHole()
+    {
+        GameObject.Instantiate(blackHolePrefab);
+    }
 }
+
