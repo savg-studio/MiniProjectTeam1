@@ -405,7 +405,7 @@ MonoBehaviour:
   cooldownDuration: 1
   owner: {fileID: 7349283067439581593}
   laserDuration: 0.075
-  laserMaxDistance: 100
+  laserMaxDistance: 10
   layerMask:
     serializedVersion: 2
     m_Bits: 87808
