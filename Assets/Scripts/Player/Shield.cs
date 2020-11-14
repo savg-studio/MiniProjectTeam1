@@ -9,7 +9,7 @@ public class Shield : MonoBehaviour
 
     // Private
     private bool isActive;
-    private Timer timer = new Timer();
+    private Timer timer;
 
     // Cache shield object
     GameObject innerObject;
@@ -18,7 +18,7 @@ public class Shield : MonoBehaviour
     void Start()
     {
         // Prepare timer
-        timer.duration = shieldCooldown;
+        timer = new Timer(shieldCooldown);
         timer.SetCallback(Enable);
 
         innerObject = transform.GetChild(0).gameObject;

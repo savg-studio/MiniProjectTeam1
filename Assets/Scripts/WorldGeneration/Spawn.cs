@@ -9,8 +9,11 @@ public class Spawn : MonoBehaviour
     public float chanceToSpawn = 0.75f;
     public uint minAmount;
     public uint maxAmount;
-
+    public Transform objectParent;
+    
+    // Cache
     private BoxCollider2D boxCollider;
+
 
     public void Start()
     {
@@ -51,6 +54,9 @@ public class Spawn : MonoBehaviour
     {
         Vector3 spawnPoint = GetRandomPointInBounds();
         var go = GameObject.Instantiate(objectToSpawn, spawnPoint, Quaternion.identity);
+
+        if (objectParent)
+            go.transform.parent = objectParent;
 
         OnSpawn(go);
     }

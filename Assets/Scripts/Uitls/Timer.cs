@@ -9,20 +9,48 @@ public class Timer
     public float duration;
 
     // Inner
+    private bool isStopped;
     private float timeLeft;
 
     Action callback;
+
+    public Timer(float duration)
+    {
+        this.duration = duration;
+    }
 
     public void Start()
     {
         timeLeft = duration;
     }
 
+    public void Stop()
+    {
+        isStopped = true;
+    }
+
+    public void Resume()
+    {
+        isStopped = false;
+    }
+
+    public void Restart()
+    {
+        Start();
+        isStopped = false;
+    }
+
     public void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (IsOver())
-            callback();
+        if (!isStopped)
+        {
+            timeLeft -= Time.deltaTime;
+            if (IsOver())
+            {
+                callback();
+                isStopped = true;
+            }
+        }
     }
 
     public bool IsOver()

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
+    // Public params
+    public float generationCooldown;
+
     // Inner
     private Vector2 chunkIndex;
     private WorldGenerator worldGenerator;
-
     private SpriteRenderer spriteRenderer;
+
+    private bool generationEnabled = true;
 
     public Vector2 GetSize()
     {
@@ -27,16 +31,22 @@ public class Chunk : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         Player potentialPlayer = collision.gameObject.GetComponent<Player>();
-        Debug.Log("Something entered this chunk");
 
-        if(potentialPlayer && worldGenerator)
+        if(potentialPlayer && worldGenerator && generationEnabled)
         {
-            worldGenerator.OnPlayerEnterChunk(chunkIndex);
+            CallWorldGenerator();
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void CallWorldGenerator()
     {
-        Debug.Log("Something stayed this chunk");
+        worldGenerator.OnPlayerEnterChunk(chunkIndex);
+        generationEnabled = false;
+        Invoke("EnableGeneration", generationCooldown);
+    }
+
+    private void EnableGeneration()
+    {
+        generationEnabled = true;
     }
 }
