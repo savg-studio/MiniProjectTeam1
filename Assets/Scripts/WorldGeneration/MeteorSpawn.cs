@@ -12,8 +12,10 @@ public class MeteorSpawn : SpaceTrashSpawn
 
     // Start is called before the first frame update
     protected override void OnStart()
-    {        
+    {
         meteorZone = spawnTarget.GetComponent<MeteorZone>();
+
+        base.OnStart();
     }
 
     override protected void OnSpawn(GameObject go) 

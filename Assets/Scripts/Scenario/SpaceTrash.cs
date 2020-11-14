@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class SpaceTrash : MonoBehaviour
 {
-
-    private float torque;
-    private float dir;
+    private Vector2 velocity;
+    private float angularVelocity;
 
     private Rigidbody2D rigidbody;
 
@@ -15,15 +14,20 @@ public class SpaceTrash : MonoBehaviour
         Init();
     }
 
+    public void Update()
+    {
+        velocity = rigidbody.velocity;
+        angularVelocity = rigidbody.angularVelocity;
+    }
+
     public void Init()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        dir = Random.Range(0, 2) == 1 ? 1 : -1;
     }
 
-    public void SetTorque(float minTorque, float maxTorque)
+    public void SetAngularVelocity(float angularVel)
     {
-        torque = Random.Range(minTorque, maxTorque) * dir;
+        rigidbody.angularVelocity = angularVel;
     }
 
     public void SetRandomRotation()
@@ -38,6 +42,10 @@ public class SpaceTrash : MonoBehaviour
 
     private void OnEnable()
     {
-        rigidbody.angularVelocity = torque;
+        if (rigidbody)
+        {
+            rigidbody.velocity = velocity;
+            rigidbody.angularVelocity = angularVelocity;
+        }
     }
 }

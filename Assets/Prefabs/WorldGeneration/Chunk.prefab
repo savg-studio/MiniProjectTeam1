@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2089412294316053283}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2089412292914532576
 GameObject:
@@ -59,7 +59,7 @@ Transform:
   m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children: []
   m_Father: {fileID: 2089412294316053283}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2089412292914532583
 SpriteRenderer:
@@ -140,6 +140,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7509830616071832553}
   - {fileID: 2089412294598389600}
   - {fileID: 2089412294369704466}
   - {fileID: 2089412292914532582}
@@ -221,7 +222,7 @@ Transform:
   m_LocalScale: {x: 19, y: 14, z: 1}
   m_Children: []
   m_Father: {fileID: 2089412294316053283}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2089412294369704467
 BoxCollider2D:
@@ -267,8 +268,8 @@ MonoBehaviour:
   minAmount: 1
   maxAmount: 2
   objectParent: {fileID: 1001624020562854417}
-  minTorque: 100
-  maxTorque: 100
+  minAngularVelocity: 0
+  maxAngularVelocity: 20
   minSize: 1.5
   maxSize: 3
 --- !u!114 &2089412294369704462
@@ -289,8 +290,8 @@ MonoBehaviour:
   minAmount: 1
   maxAmount: 2
   objectParent: {fileID: 1001624020562854417}
-  minTorque: 100
-  maxTorque: 100
+  minAngularVelocity: 0
+  maxAngularVelocity: 150
   minSize: 0.33
   maxSize: 0.33
 --- !u!114 &2089412294369704463
@@ -311,8 +312,8 @@ MonoBehaviour:
   minAmount: 0
   maxAmount: 1
   objectParent: {fileID: 1001624020562854417}
-  minTorque: 0
-  maxTorque: 0
+  minAngularVelocity: 0
+  maxAngularVelocity: 0
   minSize: 0.35
   maxSize: 0.35
 --- !u!114 &2089412294369704456
@@ -333,8 +334,8 @@ MonoBehaviour:
   minAmount: 0
   maxAmount: 1
   objectParent: {fileID: 1001624020562854417}
-  minTorque: 0
-  maxTorque: 0
+  minAngularVelocity: 0
+  maxAngularVelocity: 0
   minSize: 0.35
   maxSize: 0.35
 --- !u!1 &2089412294598389596
@@ -369,7 +370,7 @@ Transform:
   m_LocalScale: {x: 19, y: 14, z: 7.9360948}
   m_Children: []
   m_Father: {fileID: 2089412294316053283}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2089412294598389601
 BoxCollider2D:
@@ -451,6 +452,103 @@ MonoBehaviour:
   minAmount: 0
   maxAmount: 1
   objectParent: {fileID: 0}
+--- !u!1 &3136809238330172716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7509830616071832553}
+  - component: {fileID: 8703582197600527317}
+  - component: {fileID: 238586148767016093}
+  - component: {fileID: 6336726553175868723}
+  m_Layer: 9
+  m_Name: MeteorSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7509830616071832553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136809238330172716}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2089412294316053283}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &8703582197600527317
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136809238330172716}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 17.75, y: 14}
+  m_EdgeRadius: 0
+--- !u!114 &238586148767016093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136809238330172716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f4538afcf31114c98e79333c7901ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 1426952341672817042, guid: 03987e79f20ce2b4ea5086dd104b4dda,
+    type: 3}
+  chanceToSpawn: 0.5
+  minAmount: 1
+  maxAmount: 4
+  objectParent: {fileID: 1001624020562854417}
+  minAngularVelocity: 0
+  maxAngularVelocity: 0
+  minSize: 0.25
+  maxSize: 0.5
+  spawnTarget: {fileID: 3136809238330172716}
+  minForce: 40
+  maxForce: 120
+--- !u!114 &6336726553175868723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3136809238330172716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3592c459f432d36459e334e25fd70cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMeteors: 4
 --- !u!1 &4652797201533295854
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,5 +577,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2089412294316053283}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

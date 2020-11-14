@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpaceTrashSpawn : Spawn
 {
-    public float minTorque;
-    public float maxTorque;
+    public float minAngularVelocity;
+    public float maxAngularVelocity;
 
     public float minSize;
     public float maxSize;
@@ -18,7 +18,7 @@ public class SpaceTrashSpawn : Spawn
 
         st.Init();
         st.SetRandomRotation();
-        //st.SetTorque(minTorque, maxTorque);
+        st.SetAngularVelocity(Random.Range(minAngularVelocity, maxAngularVelocity));
     }
 
     protected void SetRandomSize(Transform transform)
