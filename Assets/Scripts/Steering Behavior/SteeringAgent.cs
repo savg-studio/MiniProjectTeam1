@@ -143,7 +143,6 @@ public class SteeringAgent : MonoBehaviour
         Vector2 originRight = rightWing.transform.position;
         Vector2 dir = currentVelocity.normalized;
         float distance = (currentVelocity.magnitude / maxSpeed) * ahead;
-        
 
         var hitLeft = Physics2D.Raycast(originLeft, dir, distance, mask);
         Debug.DrawRay(originLeft, dir * distance);

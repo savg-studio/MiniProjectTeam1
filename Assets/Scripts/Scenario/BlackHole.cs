@@ -10,8 +10,10 @@ public class BlackHole : MonoBehaviour
     public float maxSize;
     public float growTime;
     public float centerSpawnTime;
-    private float timePassed;
+    public LayerMask extraPullLayer;
+    public float extraPull;
 
+    private float timePassed;
     private Vector2 baseScale;
     private BlackHoleCenter center;
 
@@ -19,6 +21,7 @@ public class BlackHole : MonoBehaviour
     void Start()
     {
         baseScale = transform.localScale;
+        transform.localScale = Vector2.zero;
         center = GetComponentInChildren<BlackHoleCenter>(true);
 
         Invoke("EnableCenter", centerSpawnTime);
@@ -56,6 +59,10 @@ public class BlackHole : MonoBehaviour
         var center = transform.position;
         var dirVector = (center - tarPos).normalized;
 
-        rigidbody.AddForce(dirVector * absorptionForce, forceMode);
+        var layer = rigidbody.gameObject.layer;
+        var force = ((1 << layer) & extraPullLayer) > 0 ? extraPull : absorptionForce;
+
+        rigidbody.AddForce(dirVector * force, forceMode);
+        //Debug.Log("Absorbing: " + rigidbody.gameObject.name + " with force: " + force );
     }
 }

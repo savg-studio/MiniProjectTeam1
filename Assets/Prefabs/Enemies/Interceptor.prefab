@@ -261,7 +261,7 @@ MonoBehaviour:
   stunDuration: 0.75
   invulnerabilityDuration: 0.75
   maxArmor: 1
-  frames: 30
+  frames: 10
   scaleByDist: 0
 --- !u!111 &3036161783521544629
 Animation:

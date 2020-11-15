@@ -8,8 +8,8 @@ public class Fly : AISpaceship
 
     protected override void UpdateOnCombat()
     {
-        //agent.Pursuit(GetPlayerPos(), player.GetVelocity());
-        agent.Seek(GetPlayerPos());
+        agent.Pursuit(GetPlayerPos(), player.GetVelocity());
+        //agent.Seek(GetPlayerPos());
         agent.CollisonAvoidance();
     }
 

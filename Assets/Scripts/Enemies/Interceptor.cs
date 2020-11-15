@@ -21,6 +21,7 @@ public class Interceptor : AISpaceship
 
         Debug.DrawLine(transform.position, point);
         agent.Seek(point);
+        //agent.Pursuit(GetPlayerPos(), player.GetVelocity());
         agent.CollisonAvoidance();
 
         if (CanUseWeapon())

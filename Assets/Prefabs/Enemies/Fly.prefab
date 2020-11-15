@@ -213,7 +213,7 @@ MonoBehaviour:
   stunDuration: 0.75
   invulnerabilityDuration: 0
   maxArmor: 0
-  combatSpeed: 0.05
+  combatSpeed: 0.075
 --- !u!114 &2556002432949512384
 MonoBehaviour:
   m_ObjectHideFlags: 0

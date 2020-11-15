@@ -243,6 +243,10 @@ MonoBehaviour:
   maxSize: 500
   growTime: 90
   centerSpawnTime: 5
+  extraPullLayer:
+    serializedVersion: 2
+    m_Bits: 16384
+  extraPull: 2500
 --- !u!58 &5818104391256166264
 CircleCollider2D:
   m_ObjectHideFlags: 0
