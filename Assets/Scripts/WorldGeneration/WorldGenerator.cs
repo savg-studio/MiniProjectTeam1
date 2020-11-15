@@ -13,43 +13,75 @@ public class WorldGenerator : MonoBehaviour
     public GameObject blackHolePrefab;
     public float blackHoleSpawnTime;
 
+    private Vector2 currentChunkIndex;
+
     // Inner
     private Dictionary<Vector2, Chunk> chunks = new Dictionary<Vector2, Chunk>();
 
     private void Start()
     {
         CreateOriginChunk();
-        GenerateOrActivateChunksAround(Vector2.zero);
+        var chunksToActivate = GetChunksToActivateAround(Vector2.zero);
+        GenerateOrActivateChunks(chunksToActivate);
         Invoke("SpawnBlackHole", blackHoleSpawnTime);
+    }
+
+    private void Update()
+    {
+        //Debug.Log("Current chunk is " + CalculateCurrentChunkIndex());
+        var chunkIndex = CalculateCurrentChunkIndex();
+        if(chunkIndex != currentChunkIndex)
+        {
+            OnPlayerEnterChunk(chunkIndex);
+            currentChunkIndex = chunkIndex;
+            //Debug.Log("Current chunk is " + chunkIndex);
+        }
+    }
+
+    public Vector2 CalculateCurrentChunkIndex()
+    {
+        Vector2 playerPos = player.transform.position;
+        Chunk chunk = chunkPrefab.GetComponent<Chunk>();
+        chunk.Construct(Vector2.zero);
+        Vector2 chunkSize = chunk.GetSize();
+        Vector2 chunkOffset = chunkSize / 2;
+
+        int indexX = Mathf.FloorToInt((playerPos.x + chunkOffset.x) / chunkSize.x);
+        int indexY = Mathf.FloorToInt((playerPos.y + chunkOffset.y) / chunkSize.y);
+
+        return new Vector2(indexX, indexY);
     }
 
     private void CreateOriginChunk()
     {
         chunks.Add(Vector2.zero, originChunk);
-        originChunk.Construct(Vector2.zero, this);
+        originChunk.Construct(Vector2.zero);
 
         if (chunkContainer)
             originChunk.transform.parent = chunkContainer;
     }
 
-    private void GenerateOrActivateChunksAround(Vector2 basePos)
+    public void OnPlayerEnterChunk(Vector2 chunkIndex)
     {
-        for(int i = -chunkDistance; i < chunkDistance; i++)
+        var chunksToActivate = GetChunksToActivateAround(chunkIndex);
+        var chunksToDisable = GetChunksToDisable(chunksToActivate);
+        GenerateOrActivateChunks(chunksToActivate);
+        DisableChunks(chunksToDisable);
+    }
+
+    private void GenerateOrActivateChunks(List<Vector2> chunksToActivate)
+    {
+        foreach (var chunkPos in chunksToActivate)
         {
-            for(int j = -chunkDistance; j < chunkDistance; j++)
+            if (chunks.ContainsKey(chunkPos))
             {
-                Vector2 pos = new Vector2(i, j);
-                Vector2 chunkPos = pos + basePos;
-                if (chunks.ContainsKey(chunkPos))
-                {
-                    var chunk = chunks[chunkPos];
-                    chunk.gameObject.SetActive(true);
-                }
-                else
-                {
-                    var chunk = CreateChunkAt(chunkPos);
-                    chunks.Add(chunkPos, chunk);
-                }
+                var chunk = chunks[chunkPos];
+                chunk.gameObject.SetActive(true);
+            }
+            else
+            {
+                var chunk = CreateChunkAt(chunkPos);
+                chunks.Add(chunkPos, chunk);
             }
         }
     }
@@ -58,8 +90,8 @@ public class WorldGenerator : MonoBehaviour
     {
         var chunkGo = GameObject.Instantiate(chunkPrefab);
         var chunk = chunkGo.GetComponent<Chunk>();
-        
-        chunk.Construct(pos, this);
+
+        chunk.Construct(pos);
 
         // Set real pos
         pos.Scale(chunk.GetSize());
@@ -75,22 +107,46 @@ public class WorldGenerator : MonoBehaviour
         return chunk;
     }
 
-    public void OnPlayerEnterChunk(Vector2 chunkIndex)
+    private List<Vector2> GetChunksToActivateAround(Vector2 basePos)
     {
-        DisableEveryChunk();
-        GenerateOrActivateChunksAround(chunkIndex);
+        List<Vector2> chunksToActivate = new List<Vector2>();
+        for (int i = -chunkDistance; i < chunkDistance; i++)
+        {
+            for (int j = -chunkDistance; j < chunkDistance; j++)
+            {
+                Vector2 pos = new Vector2(i, j);
+                Vector2 chunkPos = pos + basePos;
+                chunksToActivate.Add(chunkPos);
+            }
+        }
+
+        return chunksToActivate;
     }
 
-    public void DisableEveryChunk()
+    private List<Vector2> GetChunksToDisable(List<Vector2> chunksToActivate)
     {
+        List<Vector2> chunksToDisable = new List<Vector2>();
+
         foreach(var chunkPair in chunks)
         {
-            Chunk chunk = chunkPair.Value;
+            if (!chunksToActivate.Contains(chunkPair.Key))
+                chunksToDisable.Add(chunkPair.Key);
+        }
+
+        return chunksToDisable;
+    }
+
+    public void DisableChunks(List<Vector2> chunkToDisable)
+    {
+        foreach(var chunkPos in chunkToDisable)
+        {
+            Chunk chunk = chunks[chunkPos];
             chunk.gameObject.SetActive(false);
         }
     }
 
 
+    // Black hole
     private void SpawnBlackHole()
     {
         GameObject.Instantiate(blackHolePrefab);

@@ -100,6 +100,12 @@ public class Spaceship : MonoBehaviour
     {
         SetFlag(SpaceshipStateFlags.STUNNED);
         Invoke("RecoverStun", duration);
+        OnStun();
+    }
+
+    protected virtual void OnStun()
+    {
+
     }
 
     public void RecoverStun()
@@ -189,9 +195,7 @@ public class Spaceship : MonoBehaviour
         return weapon && !weapon.IsInCooldown() && !HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.STUNNED);
     }
 
-
-
-
+    // Collisions
     public void OnCollisionEnter2D(Collision2D collision)
     {
         var layer = collision.gameObject.layer;

@@ -241,7 +241,7 @@ MonoBehaviour:
   absorptionForce: 4
   forceMode: 0
   maxSize: 500
-  growTime: 120
+  growTime: 90
   centerSpawnTime: 5
 --- !u!58 &5818104391256166264
 CircleCollider2D:

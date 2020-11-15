@@ -137,10 +137,19 @@ public class Player : Spaceship
 
     // Stun
 
+    protected override void OnStun()
+    {
+        Debug.Log("Player was stunned");
+    }
+
+    // Damage
+
     protected override void OnDamageTaken()
     {
         display.SetCurrentArmor(currentArmor);
     }
+
+    // Death
 
     protected override void OnDeath()
     {
