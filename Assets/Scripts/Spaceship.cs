@@ -29,6 +29,7 @@ public class Spaceship : MonoBehaviour
     private Shield shield;
     private SpriteRenderer spriteRenderer;
     private Animation blinkAnimation;
+    protected Rigidbody2D rigidbody2D;
 
     // Unity methods and custom hooks
     protected void Start()
@@ -41,6 +42,7 @@ public class Spaceship : MonoBehaviour
         var son = transform.Find("Sprite");
         blinkAnimation = son.GetComponent<Animation>();
         spriteRenderer = son.GetComponent<SpriteRenderer>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
 
         SetWeapon(weapon);
 
@@ -64,6 +66,11 @@ public class Spaceship : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!HasFlag(SpaceshipStateFlags.STUNNED))
+        {
+            ResetRigidbody();
+        }
+
         OnFixedUpdate();
     }
 
@@ -193,6 +200,13 @@ public class Spaceship : MonoBehaviour
     public bool CanUseWeapon()
     {
         return weapon && !weapon.IsInCooldown() && !HasFlag(SpaceshipStateFlags.DEAD) && !HasFlag(SpaceshipStateFlags.STUNNED);
+    }
+
+    // Rigibody
+    private void ResetRigidbody()
+    {
+        rigidbody2D.angularVelocity = 0;
+        rigidbody2D.velocity = Vector2.zero;
     }
 
     // Collisions

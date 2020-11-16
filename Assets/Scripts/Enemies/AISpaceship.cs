@@ -16,7 +16,6 @@ public class AISpaceship : Spaceship
 
     // Cache
     protected SteeringAgent agent;
-    protected Rigidbody2D rigidbody2D;
     private PolygonCollider2D pCollider;
     private Animation deathAnim;
     private float deathAnimationDuration;

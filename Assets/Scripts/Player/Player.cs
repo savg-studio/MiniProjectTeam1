@@ -58,11 +58,8 @@ public class Player : Spaceship
         }
     }
 
-    void FixedUpdate()
+    protected override void  OnFixedUpdate()
     {
-        if (!HasFlag(SpaceshipStateFlags.STUNNED))
-            ResetAngularVelocity();
-
         if (!HasFlag(SpaceshipStateFlags.STUNNED))
         {
             Vector3 newRotation = GetInputRotation();
@@ -108,11 +105,6 @@ public class Player : Spaceship
         Vector3 dir = GetCurrentDirection();
         Vector2 nextPos = transform.position + dir * speed * Time.deltaTime;
         rigidBody2D.MovePosition(nextPos);
-    }
-
-    private void ResetAngularVelocity()
-    {
-        rigidBody2D.angularVelocity = 0;
     }
 
     private Vector2 GetCurrentDirection()
