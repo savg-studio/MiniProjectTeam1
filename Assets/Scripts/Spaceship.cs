@@ -150,7 +150,7 @@ public class Spaceship : MonoBehaviour
 
     public void RestoreArmor(uint amount = 3)
     {
-        currentArmor = (uint)Mathf.Max(amount, maxArmor);
+        currentArmor = (uint)Mathf.Min(currentArmor + amount, maxArmor);
         OnRestoreArmor();
     }
 
