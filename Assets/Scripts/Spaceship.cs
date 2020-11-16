@@ -148,6 +148,17 @@ public class Spaceship : MonoBehaviour
 
     }
 
+    public void RestoreArmor(uint amount = 3)
+    {
+        currentArmor = (uint)Mathf.Max(amount, maxArmor);
+        OnRestoreArmor();
+    }
+
+    protected virtual void OnRestoreArmor()
+    {
+
+    }
+
     // Invulnerability
     protected void StartInvulnerability()
     {

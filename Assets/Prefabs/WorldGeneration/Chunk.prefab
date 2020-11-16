@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 2089412294369704462}
   - component: {fileID: 2089412294369704463}
   - component: {fileID: 2089412294369704456}
+  - component: {fileID: 5569359348570941932}
   m_Layer: 17
   m_Name: SpaceTrashSpawn
   m_TagString: Untagged
@@ -328,7 +329,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 5285345283455847622, guid: 2b6f5cca0c81f4a44b0090058e301f53,
     type: 3}
-  chanceToSpawn: 0.25
+  chanceToSpawn: 0.2
+  minAmount: 0
+  maxAmount: 1
+  objectParent: {fileID: 1001624020562854417}
+  minAngularVelocity: 0
+  maxAngularVelocity: 0
+  minSize: 0.35
+  maxSize: 0.35
+--- !u!114 &5569359348570941932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089412294369704457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3917aebd196cc384da6716cf3ebf9c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 3984527309924458968, guid: d0a7b5e173667b04d95e77a36a4639c2,
+    type: 3}
+  chanceToSpawn: 0.1
   minAmount: 0
   maxAmount: 1
   objectParent: {fileID: 1001624020562854417}

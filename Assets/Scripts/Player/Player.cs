@@ -141,6 +141,13 @@ public class Player : Spaceship
         display.SetCurrentArmor(currentArmor);
     }
 
+    // Armor
+
+    protected override void OnRestoreArmor()
+    {
+        display.SetCurrentArmor(currentArmor);
+    }
+
     // Death
 
     protected override void OnDeath()
