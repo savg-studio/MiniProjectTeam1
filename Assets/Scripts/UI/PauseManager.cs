@@ -2,16 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu;
 
+    // Cache
     private float baseTimeScale;
+
+        // Audio
+    private AudioSource music;
+    private Text musicButtonText;
 
     private void Start()
     {
         baseTimeScale = Time.timeScale;
+        music = GetComponent<AudioSource>();
+        musicButtonText = pauseMenu.transform.Find("MusicButton").gameObject.GetComponentInChildren<Text>();
     }
 
     private void Update()
@@ -42,5 +50,17 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ToggleMusic()
+    {
+        bool musicStatus = music.isPlaying;
+        if (musicStatus)
+            music.Pause();
+        else
+            music.Play();
+
+        string suffix = music.isPlaying ? "on" : "off";
+        musicButtonText.text = "music: " + suffix;
     }
 }
