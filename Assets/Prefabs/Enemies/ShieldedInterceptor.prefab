@@ -408,7 +408,7 @@ MonoBehaviour:
   laserMaxDistance: 10
   layerMask:
     serializedVersion: 2
-    m_Bits: 87808
+    m_Bits: 87296
   laserScaler: 1.1
 --- !u!1 &7349283067439581283
 GameObject:

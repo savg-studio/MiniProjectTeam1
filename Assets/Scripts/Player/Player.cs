@@ -139,7 +139,7 @@ public class Player : Spaceship
 
     protected override void OnStun()
     {
-        Debug.Log("Player was stunned");
+        //Debug.Log("Player was stunned");
     }
 
     // Damage
