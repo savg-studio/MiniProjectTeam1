@@ -15,7 +15,7 @@ public class Shield : MonoBehaviour
     GameObject innerObject;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Prepare timer
         timer = new Timer(shieldCooldown);
@@ -49,7 +49,8 @@ public class Shield : MonoBehaviour
     public void Disable()
     {
         isActive = false;
-        innerObject.SetActive(false);
+        if(innerObject)
+            innerObject.SetActive(false);
         timer.Restart();
     }
 }

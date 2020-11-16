@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3036161782375013192}
   - component: {fileID: 3036161782375013193}
-  m_Layer: 8
+  m_Layer: 19
   m_Name: AggroRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

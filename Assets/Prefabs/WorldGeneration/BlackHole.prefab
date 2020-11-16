@@ -241,7 +241,7 @@ MonoBehaviour:
   absorptionForce: 4
   forceMode: 0
   maxSize: 500
-  growTime: 90
+  growTime: 50
   centerSpawnTime: 5
   extraPullLayer:
     serializedVersion: 2

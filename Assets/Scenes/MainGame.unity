@@ -359,10 +359,10 @@ MonoBehaviour:
   originChunk: {fileID: 5614275446559437459}
   player: {fileID: 172361412}
   chunkContainer: {fileID: 1884197092}
-  chunkDistance: 2
+  chunkDistance: 1
   blackHolePrefab: {fileID: 5818104391256166260, guid: be6b892652625ad4384da16591ff5ca9,
     type: 3}
-  blackHoleSpawnTime: 1
+  blackHoleSpawnTime: 5
 --- !u!4 &223641106
 Transform:
   m_ObjectHideFlags: 0

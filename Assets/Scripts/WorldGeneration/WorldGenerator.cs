@@ -21,8 +21,7 @@ public class WorldGenerator : MonoBehaviour
     private void Start()
     {
         CreateOriginChunk();
-        var chunksToActivate = GetChunksToActivateAround(Vector2.zero);
-        GenerateOrActivateChunks(chunksToActivate);
+        OnPlayerEnterChunk(Vector2.zero);
         Invoke("SpawnBlackHole", blackHoleSpawnTime);
     }
 
@@ -33,7 +32,6 @@ public class WorldGenerator : MonoBehaviour
         if(chunkIndex != currentChunkIndex)
         {
             OnPlayerEnterChunk(chunkIndex);
-            currentChunkIndex = chunkIndex;
             //Debug.Log("Current chunk is " + chunkIndex);
         }
     }
@@ -65,24 +63,31 @@ public class WorldGenerator : MonoBehaviour
     {
         var chunksToActivate = GetChunksToActivateAround(chunkIndex);
         var chunksToDisable = GetChunksToDisable(chunksToActivate);
-        GenerateOrActivateChunks(chunksToActivate);
+        StartCoroutine(GenerateOrActivateChunks(chunksToActivate));
         DisableChunks(chunksToDisable);
+        currentChunkIndex = chunkIndex;
     }
 
-    private void GenerateOrActivateChunks(List<Vector2> chunksToActivate)
+    private IEnumerator GenerateOrActivateChunks(List<Vector2> chunksToActivate)
     {
         foreach (var chunkPos in chunksToActivate)
         {
-            if (chunks.ContainsKey(chunkPos))
-            {
-                var chunk = chunks[chunkPos];
-                chunk.gameObject.SetActive(true);
-            }
-            else
-            {
-                var chunk = CreateChunkAt(chunkPos);
-                chunks.Add(chunkPos, chunk);
-            }
+            GenerateOrActivateChunk(chunkPos);
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private void GenerateOrActivateChunk(Vector2 chunkPos)
+    {
+        if (chunks.ContainsKey(chunkPos))
+        {
+            var chunk = chunks[chunkPos];
+            chunk.gameObject.SetActive(true);
+        }
+        else
+        {
+            var chunk = CreateChunkAt(chunkPos);
+            chunks.Add(chunkPos, chunk);
         }
     }
 
@@ -107,12 +112,20 @@ public class WorldGenerator : MonoBehaviour
         return chunk;
     }
 
+    private IEnumerator CreateChunkAtCoroutine(Vector2 pos)
+    {
+        var chunk = CreateChunkAt(pos);
+        chunks.Add(pos, chunk);
+        //yield return new WaitForEndOfFrame();
+        yield return new WaitForSecondsRealtime(1);
+    }
+
     private List<Vector2> GetChunksToActivateAround(Vector2 basePos)
     {
         List<Vector2> chunksToActivate = new List<Vector2>();
-        for (int i = -chunkDistance; i < chunkDistance; i++)
+        for (int i = -chunkDistance; i <= chunkDistance; i++)
         {
-            for (int j = -chunkDistance; j < chunkDistance; j++)
+            for (int j = -chunkDistance; j <= chunkDistance; j++)
             {
                 Vector2 pos = new Vector2(i, j);
                 Vector2 chunkPos = pos + basePos;
