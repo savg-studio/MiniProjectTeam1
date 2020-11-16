@@ -16,7 +16,7 @@ public class PowerUp : MonoBehaviour
             var weapon = weaponClone.GetComponent<WeaponBase>();
             player.SetSecondWeapon(weapon);
 
-            GameObject.Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

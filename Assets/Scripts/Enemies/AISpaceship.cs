@@ -96,7 +96,7 @@ public class AISpaceship : Spaceship
 
     protected virtual void OnDeathAnimationEnd()
     {
-        GameObject.Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     // Player interaction

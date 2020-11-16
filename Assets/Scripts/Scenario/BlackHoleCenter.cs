@@ -14,7 +14,7 @@ public class BlackHoleCenter : MonoBehaviour
             else
             {
                 //Debug.Log(collision.gameObject.name + " was destroyed by black hole");
-                GameObject.Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
             }
         }
     }

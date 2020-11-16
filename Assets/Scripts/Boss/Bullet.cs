@@ -18,6 +18,6 @@ public class Bullet : Projectile
 
     private void OnBecameInvisible()
     {
-        GameObject.Destroy(this);
+        this.gameObject.SetActive(false);
     }
 }

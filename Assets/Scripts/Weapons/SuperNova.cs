@@ -48,7 +48,7 @@ public class SuperNova : Explosion
 
     private void OnExplode()
     {
-        GameObject.Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     private void DecreaseTime()

@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
         Projectile meteor = go.GetComponent<Projectile>();
         if (meteor)
         {
-            GameObject.Destroy(go);
+            go.SetActive(false);
         }
         
     }

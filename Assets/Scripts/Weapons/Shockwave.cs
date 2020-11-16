@@ -33,6 +33,6 @@ public class Shockwave : Explosion
 
     private void OnBecameInvisible()
     {
-        GameObject.Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }

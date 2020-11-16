@@ -14,7 +14,7 @@ public class HealthPack_Script : MonoBehaviour
         if (player)
         {
             player.RestoreArmor(armorRestored);
-            GameObject.Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }
