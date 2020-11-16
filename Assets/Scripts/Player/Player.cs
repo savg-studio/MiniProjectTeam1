@@ -13,7 +13,9 @@ public class Player : Spaceship
     public float minSpeed;
     public float baseSpeed;
     public float rotationSpeed;
+    public float acceleration;
     private float speed;
+    private float accumulatedSpeed;
 
     // Second weapon
     private WeaponBase secondWeapon;
@@ -39,11 +41,17 @@ public class Player : Spaceship
     {
         // Movement speed
         if (Input.GetAxis("Vertical") == 1)
-            speed = maxSpeed;
-        else if (Input.GetAxis("Vertical") == -1) 
+            speed = maxSpeed + accumulatedSpeed;
+        else if (Input.GetAxis("Vertical") == -1)
+        {
             speed = minSpeed;
+            accumulatedSpeed = 0;
+        }
         else
+        {
             speed = baseSpeed;
+            accumulatedSpeed = 0;
+        }
      
 
         // Attack
@@ -64,6 +72,7 @@ public class Player : Spaceship
         {
             Vector3 newRotation = GetInputRotation();
             Rotate(newRotation);
+            IncreaseAccumulatedSpeed();
             Move();
         }
     }
@@ -100,6 +109,11 @@ public class Player : Spaceship
         rigidBody2D.SetRotation(rotation.z);
     }
 
+    private void IncreaseAccumulatedSpeed()
+    {
+        accumulatedSpeed += acceleration;
+    }
+
     private void Move()
     {
         Vector3 dir = GetCurrentDirection();
@@ -132,6 +146,7 @@ public class Player : Spaceship
     protected override void OnStun()
     {
         //Debug.Log("Player was stunned");
+        accumulatedSpeed = 0;
     }
 
     // Damage
