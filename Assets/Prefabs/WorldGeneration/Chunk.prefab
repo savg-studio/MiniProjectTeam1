@@ -484,7 +484,6 @@ GameObject:
   - component: {fileID: 7509830616071832553}
   - component: {fileID: 8703582197600527317}
   - component: {fileID: 238586148767016093}
-  - component: {fileID: 6336726553175868723}
   m_Layer: 9
   m_Name: MeteorSpawn
   m_TagString: Untagged
@@ -557,19 +556,6 @@ MonoBehaviour:
   spawnTarget: {fileID: 3136809238330172716}
   minForce: 40
   maxForce: 120
---- !u!114 &6336726553175868723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3136809238330172716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3592c459f432d36459e334e25fd70cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMeteors: 4
 --- !u!1 &4652797201533295854
 GameObject:
   m_ObjectHideFlags: 0
