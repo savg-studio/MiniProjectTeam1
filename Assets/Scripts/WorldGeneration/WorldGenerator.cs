@@ -17,9 +17,14 @@ public class WorldGenerator : MonoBehaviour
 
     // Inner
     private Dictionary<Vector2, Chunk> chunks = new Dictionary<Vector2, Chunk>();
+    private Vector2 chunkSize;
 
     private void Start()
     {
+        var chunk = chunkPrefab.GetComponent<Chunk>();
+        chunk.Construct(Vector2.zero);
+        chunkSize = chunk.GetSize();
+
         CreateOriginChunk();
         OnPlayerEnterChunk(Vector2.zero);
         Invoke("SpawnBlackHole", blackHoleSpawnTime);
@@ -39,9 +44,6 @@ public class WorldGenerator : MonoBehaviour
     public Vector2 CalculateCurrentChunkIndex()
     {
         Vector2 playerPos = player.transform.position;
-        Chunk chunk = chunkPrefab.GetComponent<Chunk>();
-        chunk.Construct(Vector2.zero);
-        Vector2 chunkSize = chunk.GetSize();
         Vector2 chunkOffset = chunkSize / 2;
 
         int indexX = Mathf.FloorToInt((playerPos.x + chunkOffset.x) / chunkSize.x);
@@ -93,21 +95,12 @@ public class WorldGenerator : MonoBehaviour
 
     private Chunk CreateChunkAt(Vector2 pos)
     {
-        var chunkGo = GameObject.Instantiate(chunkPrefab);
+        var chunkPrefabChunk = chunkPrefab.GetComponent<Chunk>();
+        var scaledPos = pos * chunkSize;
+        var chunkGo = GameObject.Instantiate(chunkPrefab, scaledPos, Quaternion.identity, chunkContainer);
         var chunk = chunkGo.GetComponent<Chunk>();
 
         chunk.Construct(pos);
-
-        // Set real pos
-        pos.Scale(chunk.GetSize());
-        chunkGo.transform.position = pos;
-
-        // Set object parent
-        if (chunkContainer)
-            chunkGo.transform.parent = chunkContainer;
-
-        // Enable chunk to spawn objects
-        chunkGo.SetActive(true);
 
         return chunk;
     }
