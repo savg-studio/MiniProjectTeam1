@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -65,17 +66,27 @@ public class WorldGenerator : MonoBehaviour
     {
         var chunksToActivate = GetChunksToActivateAround(chunkIndex);
         var chunksToDisable = GetChunksToDisable(chunksToActivate);
-        StartCoroutine(GenerateOrActivateChunks(chunksToActivate));
+        //StartCoroutine(GenerateOrActivateChunksCR(chunksToActivate));
+        GenerateOrActivateChunks(chunksToActivate);
         DisableChunks(chunksToDisable);
+        //StartCoroutine(DisableChunks(chunksToDisable));
         currentChunkIndex = chunkIndex;
     }
 
-    private IEnumerator GenerateOrActivateChunks(List<Vector2> chunksToActivate)
+    private IEnumerator GenerateOrActivateChunksCR(List<Vector2> chunksToActivate)
     {
         foreach (var chunkPos in chunksToActivate)
         {
             GenerateOrActivateChunk(chunkPos);
             yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private void GenerateOrActivateChunks(List<Vector2> chunksToActivate)
+    {
+        foreach (var chunkPos in chunksToActivate)
+        {
+            GenerateOrActivateChunk(chunkPos);
         }
     }
 
@@ -103,14 +114,6 @@ public class WorldGenerator : MonoBehaviour
         chunk.Construct(pos);
 
         return chunk;
-    }
-
-    private IEnumerator CreateChunkAtCoroutine(Vector2 pos)
-    {
-        var chunk = CreateChunkAt(pos);
-        chunks.Add(pos, chunk);
-        //yield return new WaitForEndOfFrame();
-        yield return new WaitForSecondsRealtime(1);
     }
 
     private List<Vector2> GetChunksToActivateAround(Vector2 basePos)
@@ -142,15 +145,30 @@ public class WorldGenerator : MonoBehaviour
         return chunksToDisable;
     }
 
-    public void DisableChunks(List<Vector2> chunkToDisable)
+    public IEnumerator DisableChunksCR(List<Vector2> chunkToDisable)
     {
         foreach(var chunkPos in chunkToDisable)
         {
             Chunk chunk = chunks[chunkPos];
-            chunk.gameObject.SetActive(false);
+            if (chunk.gameObject.activeInHierarchy)
+            {
+                chunk.gameObject.SetActive(false);
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 
+    public void DisableChunks(List<Vector2> chunkToDisable)
+    {
+        foreach (var chunkPos in chunkToDisable)
+        {
+            Chunk chunk = chunks[chunkPos];
+            if (chunk.gameObject.activeInHierarchy)
+            {
+                chunk.gameObject.SetActive(false);
+            }
+        }
+    }
 
     // Black hole
     private void SpawnBlackHole()

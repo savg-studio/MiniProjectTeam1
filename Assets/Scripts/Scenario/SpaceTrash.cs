@@ -9,7 +9,7 @@ public class SpaceTrash : MonoBehaviour
 
     private Rigidbody2D rigidbody;
 
-    public void Awake()
+    public void Start()
     {
         Init();
     }

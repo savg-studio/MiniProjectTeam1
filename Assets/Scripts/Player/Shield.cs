@@ -49,8 +49,7 @@ public class Shield : MonoBehaviour
     public void Disable()
     {
         isActive = false;
-        if(innerObject)
-            innerObject.SetActive(false);
+        innerObject.SetActive(false);
         timer.Restart();
     }
 }
