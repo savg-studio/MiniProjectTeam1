@@ -66,10 +66,13 @@ public class WorldGenerator : MonoBehaviour
     {
         var chunksToActivate = GetChunksToActivateAround(chunkIndex);
         var chunksToDisable = GetChunksToDisable(chunksToActivate);
-        //StartCoroutine(GenerateOrActivateChunksCR(chunksToActivate));
+
+        StartCoroutine(GenerateOrActivateChunksCR(chunksToActivate));
+        StartCoroutine(DisableChunksCR(chunksToDisable));
+
         GenerateOrActivateChunks(chunksToActivate);
         DisableChunks(chunksToDisable);
-        //StartCoroutine(DisableChunks(chunksToDisable));
+        
         currentChunkIndex = chunkIndex;
     }
 
@@ -101,6 +104,7 @@ public class WorldGenerator : MonoBehaviour
         {
             var chunk = CreateChunkAt(chunkPos);
             chunks.Add(chunkPos, chunk);
+            chunk.gameObject.SetActive(true);
         }
     }
 

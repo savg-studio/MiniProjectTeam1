@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceTrash : MonoBehaviour
+public class SpaceTrash : MonoBehaviour, PoolGameObject
 {
     private Vector2 velocity;
     private float angularVelocity;
@@ -14,15 +14,15 @@ public class SpaceTrash : MonoBehaviour
         Init();
     }
 
+    public void Init()
+    {
+        rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     public void Update()
     {
         velocity = rigidbody.velocity;
         angularVelocity = rigidbody.angularVelocity;
-    }
-
-    public void Init()
-    {
-        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     public void SetAngularVelocity(float angularVel)
@@ -47,5 +47,23 @@ public class SpaceTrash : MonoBehaviour
             rigidbody.velocity = velocity;
             rigidbody.angularVelocity = angularVelocity;
         }
+    }
+
+    public void ResetGameObject()
+    {
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.angularVelocity = 0;
+        velocity = Vector2.zero;
+        angularVelocity = 0;
+    }
+
+    public void InitGameObject()
+    {
+        Init();
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }

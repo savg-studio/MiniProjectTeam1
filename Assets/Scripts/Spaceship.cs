@@ -11,7 +11,7 @@ public enum SpaceshipStateFlags
     INVULNERABLE = 4
 }
 
-public class Spaceship : MonoBehaviour
+public class Spaceship : MonoBehaviour, PoolGameObject
 {
     // Public Params
     public WeaponBase weapon;
@@ -31,6 +31,9 @@ public class Spaceship : MonoBehaviour
     private Animation blinkAnimation;
     protected Rigidbody2D rigidbody2D;
 
+    // Reset data
+    private Vector3 baseScale;
+
     // Unity methods and custom hooks
     protected void Start()
     {
@@ -43,6 +46,9 @@ public class Spaceship : MonoBehaviour
         blinkAnimation = son.GetComponent<Animation>();
         spriteRenderer = son.GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+
+        // ResetData
+        baseScale = transform.localScale;
 
         SetWeapon(weapon);
 
@@ -234,6 +240,46 @@ public class Spaceship : MonoBehaviour
     }
 
     protected virtual void OnCollision(Collision2D collision)
+    {
+
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+
+    public void InitGameObject()
+    {
+        Start();
+    }
+
+    public void ResetGameObject()
+    {
+        // Reset state
+        if (HasFlag(SpaceshipStateFlags.DEAD))
+            transform.localScale = baseScale;
+
+        if (HasFlag(SpaceshipStateFlags.INVULNERABLE))
+            StopInvulnerability();
+
+        if (HasFlag(SpaceshipStateFlags.STUNNED))
+            RecoverStun();
+
+        // Restore shield
+        if (shield)
+            shield.Enable();
+
+        // Reset flags
+        stateFlags = 0;
+
+        // Restore armor
+        currentArmor = maxArmor;
+
+        OnResetGameObject();
+    }
+
+    protected virtual void OnResetGameObject()
     {
 
     }

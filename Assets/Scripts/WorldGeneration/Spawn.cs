@@ -10,6 +10,7 @@ public class Spawn : MonoBehaviour
     public uint minAmount;
     public uint maxAmount;
     public Transform objectParent;
+    public ObjectPool objectPool;
     
     // Cache
     private BoxCollider2D boxCollider;
@@ -52,11 +53,25 @@ public class Spawn : MonoBehaviour
     protected void SpawnObject()
     {
         Vector3 spawnPoint = GetRandomPointInBounds();
-        var go = GameObject.Instantiate(objectToSpawn, spawnPoint, Quaternion.identity);
+        GameObject go;
 
+        // Get copy or instantiate
+        if (objectPool)
+        {
+            PoolGameObject poolGO = objectPool.GetGameObject(spawnPoint);
+            go = poolGO.GetGameObject();
+        }
+        else
+            go = GameObject.Instantiate(objectToSpawn, spawnPoint, Quaternion.identity);
+
+        // Set parent
         if (objectParent)
             go.transform.parent = objectParent;
 
+        // Enable
+        go.SetActive(true);
+
+        // Hook
         OnSpawn(go);
     }
 

@@ -138,4 +138,11 @@ public class AISpaceship : Spaceship
     {
         return agent.GetCurrentVelocity().normalized;
     }
+
+    protected override void OnResetGameObject()
+    {
+        player = null;
+        pCollider.enabled = true;
+        state = AIState.WANDER;
+    }
 }

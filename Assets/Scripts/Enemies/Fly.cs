@@ -5,6 +5,14 @@ using UnityEngine;
 public class Fly : AISpaceship
 {
     public float combatSpeed;
+    private float baseSpeed;
+
+    protected override void OnAIStart()
+    {
+        base.OnAIStart();
+
+        baseSpeed = agent.maxSpeed;
+    }
 
     protected override void UpdateOnCombat()
     {
@@ -35,4 +43,11 @@ public class Fly : AISpaceship
         }
     }
 
+
+    protected override void OnResetGameObject()
+    {
+        base.OnResetGameObject();
+
+        agent.maxSpeed = baseSpeed;
+    }
 }

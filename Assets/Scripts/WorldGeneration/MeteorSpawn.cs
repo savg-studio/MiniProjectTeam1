@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MeteorSpawn : SpaceTrashSpawn
 {
-    public GameObject spawnTarget;
     public float minForce;
     public float maxForce;
 

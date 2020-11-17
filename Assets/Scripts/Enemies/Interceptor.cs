@@ -7,10 +7,6 @@ public class Interceptor : AISpaceship
     public int frames;
     public bool scaleByDist;
 
-    protected override void OnAIStart()
-    {
-    }
-
     protected override void UpdateOnCombat()
     {
         var distanceToPlayer = GetVectorToPlayer().magnitude;
