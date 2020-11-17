@@ -70,8 +70,8 @@ public class WorldGenerator : MonoBehaviour
         StartCoroutine(GenerateOrActivateChunksCR(chunksToActivate));
         StartCoroutine(DisableChunksCR(chunksToDisable));
 
-        GenerateOrActivateChunks(chunksToActivate);
-        DisableChunks(chunksToDisable);
+        //GenerateOrActivateChunks(chunksToActivate);
+        //DisableChunks(chunksToDisable);
         
         currentChunkIndex = chunkIndex;
     }
