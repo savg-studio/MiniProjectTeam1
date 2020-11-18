@@ -541,7 +541,7 @@ MonoBehaviour:
   weapon: {fileID: 7349283067331430724}
   stunDuration: 0.75
   invulnerabilityDuration: 1
-  maxArmor: 1
+  maxArmor: 0
   frames: 10
   scaleByDist: 0
 --- !u!111 &7349283067439581598
