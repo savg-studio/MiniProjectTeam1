@@ -84,7 +84,7 @@ public class AISpaceship : Spaceship
     private void StartDeathAnimation()
     {
         deathAnim.Play();
-        Invoke("EndDeathAnimation", deathAnimationDuration);
+        // Invoke("EndDeathAnimation", deathAnimationDuration);
     }
 
     private void EndDeathAnimation()

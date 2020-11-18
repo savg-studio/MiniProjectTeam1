@@ -68,7 +68,7 @@ public class WorldGenerator : MonoBehaviour
         var chunksToDisable = GetChunksToDisable(chunksToActivate);
 
         StartCoroutine(GenerateOrActivateChunksCR(chunksToActivate));
-        StartCoroutine(DisableChunksCR(chunksToDisable));
+        //StartCoroutine(DisableChunksCR(chunksToDisable));
 
         //GenerateOrActivateChunks(chunksToActivate);
         //DisableChunks(chunksToDisable);
