@@ -951,12 +951,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 404844595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cccfda8a832f13d4fbf987df88ee74a5, type: 3}
+  m_Script: {fileID: 11500000, guid: e40595ff5ce98ad4480941bf274f3dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToWin: 500
-  distanceDisplay: {fileID: 953148186}
   resultBanner: {fileID: 152068609}
+  statusDisplay: {fileID: 953148186}
+  distanceToWin: 500
   player: {fileID: 172361412}
   origin: {fileID: 1650465325}
 --- !u!4 &404844597
@@ -1069,10 +1069,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25787e2b6ff5dce42a3fd83cc7ec90cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  startEnabled: 0
-  child: {fileID: 433838456}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,10 +1308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25787e2b6ff5dce42a3fd83cc7ec90cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  startEnabled: 0
-  child: {fileID: 672657565}
 --- !u!1 &828108647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,10 +1879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25787e2b6ff5dce42a3fd83cc7ec90cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  startEnabled: 0
-  child: {fileID: 968272130}
 --- !u!1 &1098447256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,10 +2506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25787e2b6ff5dce42a3fd83cc7ec90cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnInterval: 4
-  maxSpawnInterval: 8
-  startEnabled: 0
-  child: {fileID: 1870522076}
 --- !u!1 &1884197091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3671,7 +3655,7 @@ PrefabInstance:
         type: 3}
       propertyPath: missionTracker
       value: 
-      objectReference: {fileID: 404844596}
+      objectReference: {fileID: 0}
     - target: {fileID: 6927401035724097117, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
         type: 3}
       propertyPath: zoomScaler

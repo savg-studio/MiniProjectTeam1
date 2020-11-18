@@ -406,7 +406,7 @@ MonoBehaviour:
   chunkDistance: 1
   blackHolePrefab: {fileID: 5818104391256166260, guid: be6b892652625ad4384da16591ff5ca9,
     type: 3}
-  blackHoleSpawnTime: 30
+  blackHoleSpawnTime: 90
 --- !u!4 &223641106
 Transform:
   m_ObjectHideFlags: 0
@@ -2083,12 +2083,12 @@ PrefabInstance:
     - target: {fileID: 8221261672253551495, guid: b484a14a0d2cb3143baddc175b9a8c8c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.010141029
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 8221261672253551495, guid: b484a14a0d2cb3143baddc175b9a8c8c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9712987
+      value: 3.72
       objectReference: {fileID: 0}
     - target: {fileID: 8221261672253551495, guid: b484a14a0d2cb3143baddc175b9a8c8c,
         type: 3}

@@ -18,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
     public Text header;
     public Text footer;
     public GameObject menu;
+    public GameObject newGameMenu;
 
     public float waitFadeDuration;
     public float headerFadeDuration;
@@ -150,12 +151,10 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void OnNewGameClick(AudioSource source)
+    public void OnNewGameClick()
     {
-        source.Play();
-        var length = source.clip.length;
-        SetButtonsEnabled(false);
-        Invoke("EnterMainGame", length);
+        ActivateNewGameMenu();
+        menu.SetActive(false);
     }
 
     public void OnCloseGameClick()
@@ -163,8 +162,45 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnRaceGameClick(AudioSource source)
+    {
+        source.Play();
+        var length = source.clip.length;
+        SetButtonsEnabled(false);
+        Invoke("EnterMainGame", length);
+    }
+
+    public void OnScavengeGameClick(AudioSource source)
+    {
+        source.Play();
+        var length = source.clip.length;
+        SetButtonsEnabled(false);
+        Invoke("EnterScavengeGame", length);
+    }
+
+    public void OnGoBackClick()
+    {
+        newGameMenu.SetActive(false);
+        ActivateMenu();
+    }
+
+    public void ActivateNewGameMenu()
+    {
+        newGameMenu.SetActive(true);
+    }
+
+    public void ActivateMenu()
+    {
+        menu.SetActive(true);
+    }
+
     public void EnterMainGame()
     {
         SceneManager.LoadScene("MainGame");
+    }
+
+    public void EnterScavengeGame()
+    {
+        SceneManager.LoadScene("MainGame-CollectMode");
     }
 }
