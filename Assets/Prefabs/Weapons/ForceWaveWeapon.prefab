@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae114d39b600c28409a83db03ea0dfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownDuration: 1
+  cooldownDuration: 0.5
   owner: {fileID: 0}
   shockwaveGo: {fileID: 820861751899836111, guid: 1e2b04dfcb18bab45a1937b1662fd983,
     type: 3}

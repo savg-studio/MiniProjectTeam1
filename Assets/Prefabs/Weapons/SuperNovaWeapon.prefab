@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24b8b2d418a11b40bf4444557f432e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownDuration: 1
+  cooldownDuration: 0.5
   owner: {fileID: 0}
   superNovaGo: {fileID: 8378679854254267164, guid: a5697eb449df8ac4c8bbfd9425d383b7,
     type: 3}

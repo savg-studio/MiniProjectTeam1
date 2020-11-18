@@ -229,5 +229,5 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 20736
-  explosionDelay: 1.5
+  explosionDelay: 1
   targetColor: {r: 1, g: 1, b: 1, a: 0}

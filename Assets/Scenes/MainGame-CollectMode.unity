@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 7349283067439581283, guid: 06ea69e9669c1be4aa5698365ba9aa05, type: 3}
-  size: 9
+  size: 30
 --- !u!1 &152068606
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   chunkDistance: 1
   blackHolePrefab: {fileID: 5818104391256166260, guid: be6b892652625ad4384da16591ff5ca9,
     type: 3}
-  blackHoleSpawnTime: 90
+  blackHoleSpawnTime: 120
 --- !u!4 &223641106
 Transform:
   m_ObjectHideFlags: 0
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 3177536937977997232, guid: 2f6f94633887c5445b7c77f0cc905a8c, type: 3}
-  size: 40
+  size: 120
 --- !u!1 &672657562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 3036161783521544264, guid: 0ce7955029e044f41969d5cd60f7d8c3, type: 3}
-  size: 15
+  size: 50
 --- !u!1 &894121835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2704,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 55fe4c66d83836f4bb8e8dae5bfa3526, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dd665883399d233439a4a87ec01e9a33, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
