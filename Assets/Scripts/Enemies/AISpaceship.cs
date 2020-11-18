@@ -18,7 +18,7 @@ public class AISpaceship : Spaceship
     protected SteeringAgent agent;
     private PolygonCollider2D pCollider;
     private Animation deathAnim;
-    private float deathAnimationDuration;
+    private float deathAnimationTimeLeft;
 
     protected override void OnStart()
     {
@@ -29,7 +29,6 @@ public class AISpaceship : Spaceship
         rigidbody2D = GetComponent<Rigidbody2D>();
         pCollider = GetComponent<PolygonCollider2D>();
         deathAnim = GetComponent<Animation>();
-        deathAnimationDuration = deathAnim.GetClip("Death").length;
         
         OnAIStart();
     }
@@ -70,6 +69,9 @@ public class AISpaceship : Spaceship
     {
         if (!HasFlag(SpaceshipStateFlags.STUNNED) && !HasFlag(SpaceshipStateFlags.DEAD))
             agent.UpdateAgent();
+
+        if (HasFlag(SpaceshipStateFlags.DEAD))
+            UpdateDeathAnimation();
     }
 
     // Death
@@ -84,7 +86,14 @@ public class AISpaceship : Spaceship
     private void StartDeathAnimation()
     {
         deathAnim.Play();
-        // Invoke("EndDeathAnimation", deathAnimationDuration);
+        deathAnimationTimeLeft = deathAnim.GetClip("Death").length;
+    }
+
+    private void UpdateDeathAnimation()
+    {
+        deathAnimationTimeLeft -= Time.deltaTime;
+        if (deathAnimationTimeLeft <= 0)
+            EndDeathAnimation();
     }
 
     private void EndDeathAnimation()

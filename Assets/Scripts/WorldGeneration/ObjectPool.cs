@@ -24,6 +24,7 @@ public class ObjectPool : MonoBehaviour
         {
             var clone = GameObject.Instantiate(go);
             clone.SetActive(false);
+            clone.transform.parent = transform;
             var poolObject = clone.GetComponent<PoolGameObject>();
 
             Assert.IsNotNull(poolObject, "GameObject was not a poolObject");

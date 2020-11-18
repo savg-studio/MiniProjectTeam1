@@ -20,6 +20,8 @@ public class Spaceship : MonoBehaviour, PoolGameObject
 
     // State
     protected SpaceshipStateFlags stateFlags;
+    private float stunTimeLeft;
+    private float invulnerabilityTimeLeft;
 
     // HP
     public uint maxArmor;
@@ -62,6 +64,11 @@ public class Spaceship : MonoBehaviour, PoolGameObject
 
     void Update()
     {
+        if(HasFlag(SpaceshipStateFlags.INVULNERABLE))
+            UpdateInvulnerability();
+        if (HasFlag(SpaceshipStateFlags.STUNNED))
+            UpdateStun();
+
         OnUpdate();
     }
 
@@ -112,13 +119,20 @@ public class Spaceship : MonoBehaviour, PoolGameObject
     public void Stun(float duration)
     {
         SetFlag(SpaceshipStateFlags.STUNNED);
-        Invoke("RecoverStun", duration);
+        stunTimeLeft = duration;
         OnStun();
     }
 
     protected virtual void OnStun()
     {
 
+    }
+
+    private void UpdateStun()
+    {
+        stunTimeLeft -= Time.deltaTime;
+        if (stunTimeLeft <= 0)
+            RecoverStun();
     }
 
     public void RecoverStun()
@@ -171,7 +185,14 @@ public class Spaceship : MonoBehaviour, PoolGameObject
         SetFlag(SpaceshipStateFlags.INVULNERABLE);
         blinkAnimation.Play();
 
-        Invoke("StopInvulnerability", invulnerabilityDuration);
+        invulnerabilityTimeLeft = invulnerabilityDuration;
+    }
+
+    private void UpdateInvulnerability()
+    {
+        invulnerabilityTimeLeft -= Time.deltaTime;
+        if (invulnerabilityTimeLeft <= 0)
+            StopInvulnerability();
     }
 
     private void StopInvulnerability()
