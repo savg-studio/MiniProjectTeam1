@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 7349283067439581283, guid: 06ea69e9669c1be4aa5698365ba9aa05, type: 3}
-  size: 5
+  size: 9
 --- !u!1 &152068606
 GameObject:
   m_ObjectHideFlags: 0
