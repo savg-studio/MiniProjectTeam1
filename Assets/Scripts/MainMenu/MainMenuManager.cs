@@ -145,7 +145,7 @@ public class MainMenuManager : MonoBehaviour
         foreach (var button in menuButtons)
         {
             // This is done to prevent weird stuff with colors
-            button.GetComponent<Image>().enabled = enabled;
+            button.image.enabled = enabled;
             button.enabled = enabled;
         }
     }
@@ -154,6 +154,7 @@ public class MainMenuManager : MonoBehaviour
     {
         source.Play();
         var length = source.clip.length;
+        SetButtonsEnabled(false);
         Invoke("EnterMainGame", length);
     }
 
