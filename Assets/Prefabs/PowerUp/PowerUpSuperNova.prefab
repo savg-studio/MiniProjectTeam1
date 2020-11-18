@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4337264429379309512}
   - component: {fileID: 7162189207149183349}
-  - component: {fileID: 2791920705269634822}
   - component: {fileID: 620824204075617367}
   - component: {fileID: 6276856050596411289}
   - component: {fileID: -8096491621193830866}
+  - component: {fileID: 5178591425112216852}
   m_Layer: 0
   m_Name: PowerUpSuperNova
   m_TagString: Untagged
@@ -85,57 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2791920705269634822
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8096117605697931221}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.9, y: 14.17}
-    newSize: {x: 18.9, y: 14.17}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.35, y: -1.0849999}
-      - {x: 1.35, y: 1.8249999}
-      - {x: 1.36, y: 1.8349999}
-      - {x: 1.36, y: 2.605}
-      - {x: 1.3399999, y: 2.625}
-      - {x: 1.26, y: 2.645}
-      - {x: 1.16, y: 2.675}
-      - {x: 1.05, y: 2.705}
-      - {x: 0.84, y: 2.7649999}
-      - {x: 0.52, y: 2.855}
-      - {x: 0.13, y: 2.965}
-      - {x: 0.07, y: 2.975}
-      - {x: -1.12, y: 2.635}
-      - {x: -1.16, y: 2.605}
-      - {x: -1.16, y: 1.8449999}
-      - {x: -1.15, y: 1.8349999}
-      - {x: -1.15, y: -1.0849999}
-      - {x: -1.13, y: -1.125}
-      - {x: -1.04, y: -1.235}
-      - {x: -0.85999995, y: -1.4449999}
-      - {x: -0.71999997, y: -1.615}
-      - {x: -0.66999996, y: -1.665}
-      - {x: 0.87, y: -1.665}
-      - {x: 0.91999996, y: -1.615}
-      - {x: 1.06, y: -1.4449999}
-      - {x: 1.3299999, y: -1.115}
 --- !u!114 &620824204075617367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,3 +131,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bee205294623764a95e93549547218d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &5178591425112216852
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8096117605697931221}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.068980455, y: 0.6208149}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 18.9, y: 14.17}
+    newSize: {x: 18.9, y: 14.17}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5518017, y: 4.5128145}
+  m_EdgeRadius: 0

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1426952341672817040}
   - component: {fileID: 1426952341672817041}
   - component: {fileID: 1426952341672817053}
-  - component: {fileID: 5678461459005515474}
   - component: {fileID: 4502904439489898480}
+  - component: {fileID: 5866509417313371385}
   m_Layer: 16
   m_Name: Meteor
   m_TagString: Untagged
@@ -118,70 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89383ffd5098cf47b3827904802e4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!60 &5678461459005515474
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426952341672817042}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.9, y: 14.17}
-    newSize: {x: 18.9, y: 14.17}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.1899999, y: 0.235}
-      - {x: 1.26, y: 0.465}
-      - {x: 1.26, y: 0.675}
-      - {x: 1.1999999, y: 0.745}
-      - {x: 1.13, y: 0.78499997}
-      - {x: 1.0799999, y: 0.885}
-      - {x: 1.01, y: 1.035}
-      - {x: 1, y: 1.0649999}
-      - {x: 0.93, y: 1.125}
-      - {x: 0.76, y: 1.225}
-      - {x: 0.58, y: 1.245}
-      - {x: 0.44, y: 1.245}
-      - {x: 0.29, y: 1.225}
-      - {x: 0.14999999, y: 1.1949999}
-      - {x: -0.07, y: 1.125}
-      - {x: -0.29999998, y: 0.995}
-      - {x: -0.57, y: 0.79499996}
-      - {x: -0.69, y: 0.695}
-      - {x: -0.76, y: 0.635}
-      - {x: -0.95, y: 0.445}
-      - {x: -1.04, y: 0.345}
-      - {x: -1.11, y: 0.195}
-      - {x: -1.11, y: -0.005}
-      - {x: -1.0699999, y: -0.085}
-      - {x: -1.04, y: -0.125}
-      - {x: -0.91999996, y: -0.24499999}
-      - {x: -0.85999995, y: -0.285}
-      - {x: -0.64, y: -0.385}
-      - {x: -0.42999998, y: -0.435}
-      - {x: -0.26999998, y: -0.475}
-      - {x: 0.01, y: -0.525}
-      - {x: 0.17, y: -0.545}
-      - {x: 0.52, y: -0.575}
-      - {x: 0.58, y: -0.585}
-      - {x: 0.81, y: -0.585}
-      - {x: 0.84, y: -0.575}
-      - {x: 0.87, y: -0.445}
-      - {x: 0.87, y: -0.42499998}
-      - {x: 1.09, y: 0.024999999}
 --- !u!114 &4502904439489898480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,3 +130,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bee205294623764a95e93549547218d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &5866509417313371385
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426952341672817042}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.11453014, y: 0.33363673}
+  m_Size: {x: 2.3843722, y: 1.5776819}
+  m_Direction: 1

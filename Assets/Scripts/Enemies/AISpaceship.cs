@@ -16,7 +16,7 @@ public class AISpaceship : Spaceship
 
     // Cache
     protected SteeringAgent agent;
-    private PolygonCollider2D pCollider;
+    private Collider2D pCollider;
     private Animation deathAnim;
     private float deathAnimationTimeLeft;
 
@@ -27,7 +27,7 @@ public class AISpaceship : Spaceship
         // Cache
         agent = GetComponent<SteeringAgent>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        pCollider = GetComponent<PolygonCollider2D>();
+        pCollider = GetComponent<Collider2D>();
         deathAnim = GetComponent<Animation>();
         
         OnAIStart();
