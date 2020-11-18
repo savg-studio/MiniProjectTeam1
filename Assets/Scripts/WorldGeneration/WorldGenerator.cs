@@ -27,18 +27,18 @@ public class WorldGenerator : MonoBehaviour
         chunkSize = chunk.GetSize();
 
         CreateOriginChunk();
-        OnPlayerEnterChunk(Vector2.zero);
+        currentChunkIndex = new Vector2(Mathf.Infinity, Mathf.Infinity);
+
         Invoke("SpawnBlackHole", blackHoleSpawnTime);
     }
 
     private void Update()
     {
-        //Debug.Log("Current chunk is " + CalculateCurrentChunkIndex());
         var chunkIndex = CalculateCurrentChunkIndex();
         if(chunkIndex != currentChunkIndex)
         {
+            Debug.Log("Player entered chunk " + chunkIndex);
             OnPlayerEnterChunk(chunkIndex);
-            //Debug.Log("Current chunk is " + chunkIndex);
         }
     }
 
@@ -67,11 +67,11 @@ public class WorldGenerator : MonoBehaviour
         var chunksToActivate = GetChunksToActivateAround(chunkIndex);
         var chunksToDisable = GetChunksToDisable(chunksToActivate);
 
-        StartCoroutine(GenerateOrActivateChunksCR(chunksToActivate));
+        //StartCoroutine(GenerateOrActivateChunksCR(chunksToActivate));
         //StartCoroutine(DisableChunksCR(chunksToDisable));
 
-        //GenerateOrActivateChunks(chunksToActivate);
-        //DisableChunks(chunksToDisable);
+        GenerateOrActivateChunks(chunksToActivate);
+        DisableChunks(chunksToDisable);
         
         currentChunkIndex = chunkIndex;
     }
@@ -98,7 +98,8 @@ public class WorldGenerator : MonoBehaviour
         if (chunks.ContainsKey(chunkPos))
         {
             var chunk = chunks[chunkPos];
-            chunk.gameObject.SetActive(true);
+            if(!chunk.IsActive())
+                chunk.Activate();
         }
         else
         {
@@ -167,10 +168,8 @@ public class WorldGenerator : MonoBehaviour
         foreach (var chunkPos in chunkToDisable)
         {
             Chunk chunk = chunks[chunkPos];
-            if (chunk.gameObject.activeInHierarchy)
-            {
-                chunk.gameObject.SetActive(false);
-            }
+            if (chunk.IsActive())
+                chunk.Deactivate();
         }
     }
 

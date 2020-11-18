@@ -7,6 +7,11 @@ public class Chunk : MonoBehaviour
     // Inner
     private Vector2 chunkIndex;
     private SpriteRenderer spriteRenderer;
+    private bool isActive;
+
+    // Cache
+    private Spawn[] spawns;
+    private GameObject scenario;
 
     public Vector2 GetSize()
     {
@@ -26,5 +31,32 @@ public class Chunk : MonoBehaviour
         gameObject.name = "Chunk" + chunkIndex;
 
         this.spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        this.spawns = GetComponentsInChildren<Spawn>(true);
+        isActive = true;
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+        isActive = true;
+
+        Debug.Log("Chunk " + chunkIndex + " has been activated");
+
+        /*
+        foreach (var spawn in spawns)
+            spawn.SpawnObjects();
+        */
+    }
+
+    public void Deactivate()
+    {
+        
+        gameObject.SetActive(false);
+        isActive = false;
+    }
+
+    public bool IsActive()
+    {
+        return isActive;
     }
 }

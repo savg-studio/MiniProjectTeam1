@@ -50,7 +50,7 @@ public class ObjectPool : MonoBehaviour
         if (index == 0)
         {
             wrapped = true;
-            Debug.Log(gameObject.name + " wrapped around");
+            //Debug.Log(gameObject.name + " wrapped around");
         }
 
         return go;
