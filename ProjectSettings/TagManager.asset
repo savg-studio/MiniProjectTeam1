@@ -41,6 +41,12 @@ TagManager:
   - name: Background
     uniqueID: 3864272775
     locked: 0
+  - name: BlackHole
+    uniqueID: 1164277069
+    locked: 0
+  - name: BlackHoleCenter
+    uniqueID: 938377019
+    locked: 0
   - name: Effects
     uniqueID: 3908113025
     locked: 0
