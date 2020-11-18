@@ -181,12 +181,16 @@ MonoBehaviour:
   stunDuration: 0.75
   invulnerabilityDuration: 2
   maxArmor: 3
-  display: {fileID: 0}
-  missionFailedBanner: {fileID: 0}
+  armorDisplay: {fileID: 0}
+  speedDisplay: {fileID: 0}
+  missionTracker: {fileID: 0}
+  mainCamera: {fileID: 0}
+  maxCameraZoom: 1.2
   maxSpeed: 6
   minSpeed: 2
   baseSpeed: 3
   rotationSpeed: 250
+  acceleration: 0.01
 --- !u!50 &6927401035724097116
 Rigidbody2D:
   serializedVersion: 4
@@ -352,10 +356,15 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8465953388704212247, guid: 34558632357697146ae97254bebbe50c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8465953389885881762, guid: 34558632357697146ae97254bebbe50c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8465953389885881762, guid: 34558632357697146ae97254bebbe50c,
         type: 3}
@@ -415,7 +424,7 @@ PrefabInstance:
     - target: {fileID: 8465953389885881773, guid: 34558632357697146ae97254bebbe50c,
         type: 3}
       propertyPath: laserDuration
-      value: 0.15
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8465953389885881773, guid: 34558632357697146ae97254bebbe50c,
         type: 3}
@@ -431,6 +440,11 @@ PrefabInstance:
         type: 3}
       propertyPath: laserMaxDistance
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465953389885881773, guid: 34558632357697146ae97254bebbe50c,
+        type: 3}
+      propertyPath: cooldownDuration
+      value: 0.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34558632357697146ae97254bebbe50c, type: 3}

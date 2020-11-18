@@ -198,4 +198,11 @@ public class Player : Spaceship
         var ratio = Mathf.Min(calcRatio, maxCameraZoom);
         mainCamera.orthographicSize = baseCameraSize * ratio;
     }
+
+    // Mission
+
+    public void UpdateMission(int amount)
+    {
+        missionTracker.UpdateMissionProgress(amount);
+    }
 }

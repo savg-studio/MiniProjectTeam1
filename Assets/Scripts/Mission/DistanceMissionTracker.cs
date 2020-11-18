@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissionTracker : MonoBehaviour
+public class DistanceMissionTracker : MissionTracker
 {
     public float distanceToWin;
-    public DistanceDisplay distanceDisplay;
-    public MissionResultBanner resultBanner;
     public GameObject player;
     public GameObject origin;
 
     // Start is called before the first frame update
     void Start()
     {
-        distanceDisplay.SetDistanceText(0, distanceToWin);
+        statusDisplay.SetAmount(0, distanceToWin);
     }
 
     // Update is called once per frame
@@ -25,22 +23,13 @@ public class MissionTracker : MonoBehaviour
             Vector2 originPos = origin.transform.position;
 
             float distance = (playerPos - originPos).magnitude;
-            distanceDisplay.SetDistanceText(distance, distanceToWin);
+            statusDisplay.SetAmount(distance, distanceToWin);
 
             if (isMaxDistanceReached(distance))
                 Win();
         }
     }
 
-    public void Win()
-    {
-        resultBanner.OnWin();
-    }
-
-    public void Fail()
-    {
-        resultBanner.OnFail();
-    }
 
     private bool isMaxDistanceReached(float distance)
     {

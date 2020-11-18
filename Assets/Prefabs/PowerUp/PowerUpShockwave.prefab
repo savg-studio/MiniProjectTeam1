@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7825663382591313693}
   - component: {fileID: -6771813570022877364}
   - component: {fileID: 6076127504439732156}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: PowerUpShockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

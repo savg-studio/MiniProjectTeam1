@@ -40,8 +40,6 @@ public class Chunk : MonoBehaviour
         gameObject.SetActive(true);
         isActive = true;
 
-        Debug.Log("Chunk " + chunkIndex + " has been activated");
-
         /*
         foreach (var spawn in spawns)
             spawn.SpawnObjects();
