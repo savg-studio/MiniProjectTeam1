@@ -6,7 +6,12 @@ public class Player : Spaceship
 {
     // UI
     public ArmorDisplay display;
-    public MissionResultBanner missionFailedBanner;
+    public MissionTracker missionTracker;
+
+    // Camera
+    public Camera mainCamera;
+    public float maxCameraZoom;
+    private float baseCameraSize;
 
     // Speed
     public float maxSpeed;
@@ -34,6 +39,9 @@ public class Player : Spaceship
         // UI
         display.SetMaxArmor(maxArmor);
         display.SetCurrentArmor(maxArmor);
+
+        // Camera
+        baseCameraSize = mainCamera.orthographicSize;
     }
 
     // Update is called once per frame
@@ -41,18 +49,13 @@ public class Player : Spaceship
     {
         // Movement speed
         if (Input.GetAxis("Vertical") == 1)
-            speed = maxSpeed + accumulatedSpeed;
-        else if (Input.GetAxis("Vertical") == -1)
-        {
-            speed = minSpeed;
-            accumulatedSpeed = 0;
-        }
+            SetSpeed(maxSpeed + accumulatedSpeed);
         else
         {
-            speed = baseSpeed;
+            float speed = Input.GetAxis("Vertical") == -1 ? minSpeed : baseSpeed;
+            SetSpeed(speed);
             accumulatedSpeed = 0;
         }
-     
 
         // Attack
         if(Input.GetButtonDown("Fire1") && CanUseWeapon(weapon))
@@ -92,6 +95,12 @@ public class Player : Spaceship
     }
 
     // Movement
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+        ScaleCameraBySpeed(speed);
+    }
 
     public Vector2 GetVelocity()
     {
@@ -145,7 +154,7 @@ public class Player : Spaceship
 
     protected override void OnStun()
     {
-        //Debug.Log("Player was stunned");
+
         accumulatedSpeed = 0;
     }
 
@@ -167,7 +176,15 @@ public class Player : Spaceship
 
     protected override void OnDeath()
     {
-        missionFailedBanner.OnFail();
+        missionTracker.Fail();
         deathAnimation.Play();
+    }
+
+    // Camera
+    private void ScaleCameraBySpeed(float speed)
+    {
+        var calcRatio = Mathf.Max((speed / maxSpeed), 1);
+        var ratio = Mathf.Min(calcRatio, maxCameraZoom);
+        mainCamera.orthographicSize = baseCameraSize * ratio;
     }
 }

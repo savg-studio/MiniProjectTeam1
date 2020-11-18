@@ -32,9 +32,14 @@ public class MissionTracker : MonoBehaviour
         }
     }
 
-    private void Win()
+    public void Win()
     {
         resultBanner.OnWin();
+    }
+
+    public void Fail()
+    {
+        resultBanner.OnFail();
     }
 
     private bool isMaxDistanceReached(float distance)

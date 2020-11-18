@@ -3869,6 +3869,26 @@ PrefabInstance:
       propertyPath: acceleration
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 6927401035724097117, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 6927401035724097117, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
+        type: 3}
+      propertyPath: missionTracker
+      value: 
+      objectReference: {fileID: 404844596}
+    - target: {fileID: 6927401035724097117, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
+        type: 3}
+      propertyPath: zoomScaler
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927401035724097117, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
+        type: 3}
+      propertyPath: maxCameraZoom
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6927401035724097118, guid: 28ef45ecd1485074ba7cbab8670ba4a6,
         type: 3}
       propertyPath: m_LocalPosition.x
