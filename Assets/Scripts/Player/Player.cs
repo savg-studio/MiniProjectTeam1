@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Spaceship
 {
     // UI
-    public ArmorDisplay display;
+    public ArmorDisplay armorDisplay;
+    public Text speedDisplay;
     public MissionTracker missionTracker;
 
     // Camera
@@ -37,8 +39,8 @@ public class Player : Spaceship
         deathAnimation = GetComponent<Animation>();
 
         // UI
-        display.SetMaxArmor(maxArmor);
-        display.SetCurrentArmor(maxArmor);
+        armorDisplay.SetMaxArmor(maxArmor);
+        armorDisplay.SetCurrentArmor(maxArmor);
 
         // Camera
         baseCameraSize = mainCamera.orthographicSize;
@@ -48,11 +50,13 @@ public class Player : Spaceship
     protected override void OnUpdate() 
     {
         // Movement speed
-        if (Input.GetAxis("Vertical") == 1)
+        float axis = (Input.GetAxis("Vertical") + 1) / 2;
+        float speed = axis * (maxSpeed - minSpeed) + minSpeed;
+
+        if (speed >= maxSpeed)
             SetSpeed(maxSpeed + accumulatedSpeed);
         else
         {
-            float speed = Input.GetAxis("Vertical") == -1 ? minSpeed : baseSpeed;
             SetSpeed(speed);
             accumulatedSpeed = 0;
         }
@@ -99,7 +103,14 @@ public class Player : Spaceship
     public void SetSpeed(float speed)
     {
         this.speed = speed;
+
+        // Camera
         ScaleCameraBySpeed(speed);
+
+        // Speed display
+        const float speedScaler = 100f;
+        int fakeSpeed = Mathf.RoundToInt(speed * speedScaler);
+        speedDisplay.text = fakeSpeed + " km/h";
     }
 
     public Vector2 GetVelocity()
@@ -162,14 +173,14 @@ public class Player : Spaceship
 
     protected override void OnDamageTaken()
     {
-        display.SetCurrentArmor(currentArmor);
+        armorDisplay.SetCurrentArmor(currentArmor);
     }
 
     // Armor
 
     protected override void OnRestoreArmor()
     {
-        display.SetCurrentArmor(currentArmor);
+        armorDisplay.SetCurrentArmor(currentArmor);
     }
 
     // Death
